@@ -1,10 +1,12 @@
 
 let canvas,ctx;
-let width= 700;
+let width= 600;
 let height= 300;
-let marioSprite, groundImg;
+let marioSprite, groundImg, pipeImg;
+let pipe={positionX: width+100, positionY: 215}
 let ground={positionX: 0}
-let mario={animation: 16, vx: 0, vy: 0, gravity: 2, jump: 23, vymax: 9, jumping: false, positionX: 50,positionY: 227}
+let mario={animation: 16, vx: 0, vy: 0, gravity: 2, jump: 20, vymax: 9, jumping: false, positionX: 50,positionY: 227}
+let level={speed: 9, score: 0, finish: false}
 let FPS=20;
 const audioJump=document.getElementById("audio_jump");
 
@@ -64,8 +66,10 @@ function start(){
 function loadImage(){
     marioSprite = new Image();
     groundImg=new Image();
+    pipeImg=new Image();
     marioSprite.src= '../../assets/img/smallmariosheet.png';
     groundImg.src='../../assets/img/background.png'
+    pipeImg.src='../../assets/img/mapsheet.png'
 }
 
 //---------CLEAR CANVAS
@@ -78,13 +82,19 @@ function cleanCanvas(){
 function printAll(){
     printMap();
     printMario();
+    printPipe();
 }
+
 function printMario(){
     ctx.drawImage(marioSprite,mario.animation,0,16,16,mario.positionX,mario.positionY,25,25)
 }
 
 function printMap(){
-    ctx.drawImage(groundImg,ground.positionX,0,600,385,0,0,700,300)
+    ctx.drawImage(groundImg,ground.positionX,0,600,385,0,0,600,300)
+}
+
+function printPipe(){
+    ctx.drawImage(pipeImg,160,0,32,32,pipe.positionX,pipe.positionY,40,40)
 }
 
 
@@ -94,6 +104,9 @@ function animation(){
     gravity();
     animationMario();
     animationGround();
+    animationPipe();
+    collision();
+    scoreUpdate();
 }
 
 function animationMario(){
@@ -103,6 +116,8 @@ function animationMario(){
         }else{
             mario.animation=96;
         }
+    }else if(level.finish){
+        mario.animation=0
     }else{
         if(mario.animation===16){
             mario.animation=32;
@@ -115,9 +130,44 @@ function animationMario(){
 }
 
 function animationGround(){
-    if(ground.positionX<400){
-        ground.positionX+=10
-    }else{
+    if(ground.positionX>=width){
         ground.positionX=0
+    }else{
+        ground.positionX+=level.speed
     }
 }
+function animationPipe(){
+    if(pipe.positionX>0){
+        if(level.finish===false){
+            pipe.positionX-= level.speed - 0.18
+        }
+    }else{
+        pipe.positionX=width + random();
+        level.speed++
+        mario.gravity+=0.2;
+        mario.jump++
+    }
+}
+
+function random(){
+    let random= Math.random()
+    return Math.round(random*100)
+}
+
+//--------COLLISION
+function collision(){
+    if(pipe.positionX >= mario.positionX && pipe.positionX <= mario.positionX + 25){
+        if(mario.positionY>= pipe.positionY -40){
+            level.finish = true;
+            level.speed = 0;
+            mario.animation=0;
+        }
+    }
+}
+
+
+//---------SCORE AND LEVEL UPDATE
+function scoreUpdate(){
+    
+}
+
