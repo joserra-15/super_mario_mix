@@ -6,6 +6,7 @@ let marioSprite, groundImg;
 let ground={positionX: 0}
 let mario={animation: 16, vx: 0, vy: 0, gravity: 2, jump: 23, vymax: 9, jumping: false, positionX: 50,positionY: 227}
 let FPS=20;
+const audioJump=document.getElementById("audio_jump");
 
 document.addEventListener('load', start());
 
@@ -23,6 +24,7 @@ document.addEventListener('click', e=>{
 
 function jump(){
     if(mario.jumping === false){
+        audioJump.play()
         mario.jumping = true;
         mario.vy = mario.jump
     }
