@@ -1,5 +1,11 @@
 .body{
     overflow: hidden;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .main{
     width: 100%;
@@ -7,9 +13,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 #canvas{
     border: 2px solid black;
     width: 700px;
     height: 300px;
+}
+#button{
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    bottom: 15px;
+    right: 60px;
+    opacity: 0.6;
 }

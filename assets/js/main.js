@@ -2,17 +2,22 @@
 let canvas,ctx;
 let width= 700;
 let height= 300;
-let marioSprite;
-let groundImg;
+let marioSprite, groundImg;
 let ground={positionX: 0}
 let mario={animation: 16, vx: 0, vy: 0, gravity: 2, jump: 23, vymax: 9, jumping: false, positionX: 50,positionY: 227}
 let FPS=20;
 
+document.addEventListener('load', start());
+
 //--------JUMP
 document.addEventListener('keydown',(event) => {
     if(event.code == 'Space'){
-        console.log('salta');
         jump()
+    }
+})
+document.addEventListener('click', e=>{
+    if(e.target.id==="canvas"){
+        jump();
     }
 })
 
