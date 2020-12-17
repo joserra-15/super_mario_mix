@@ -1,16 +1,25 @@
 
 let canvas,ctx;
-let width= 600;
-let height= 300;
+const width= 600;
+const height= 300;
 let marioSprite, groundImg, pipeImg;
-let pipe={positionX: width+100, positionY: 215}
-let ground={positionX: 0}
-let mario={animation: 16, vx: 0, vy: 0, gravity: 2, jump: 20, vymax: 9, jumping: false, positionX: 50,positionY: 227}
-let level={speed: 9, score: 0, finish: false}
+const pipe={positionX: width+100, positionY: 215}
+const ground={positionX: 0}
+const mario={animation: 16, vx: 0, vy: 0, gravity: 2, jump: 20, vymax: 9, jumping: false, positionX: 50,positionY: 227}
+const level={speed: 9, score: 0, finish: false}
+let user={name: "jose", highScore: 0}
 let FPS=20;
 const audioJump=document.getElementById("audio_jump");
 
 document.addEventListener('load', start());
+
+function start(){
+    getLocalStorage();
+    let playGame = setInterval(function(){
+        main();
+    },1000/FPS)
+}
+
 
 //--------JUMP
 document.addEventListener('keydown',(event) => {
@@ -47,18 +56,17 @@ function gravity(){
 
 
 //------- MAIN FUNCTION
-let playGame = setInterval(function(){
-    main();
-},1000/FPS)
 
 function main(){
-    start();
+    initiation();
     cleanCanvas();
     animation();
     printAll();
+    collision();
+    scoreUpdate();
 }
 //-------INITIATION
-function start(){
+function initiation(){
     canvas=document.getElementById('canvas');
     ctx=canvas.getContext('2d');
     loadImage();
@@ -105,8 +113,6 @@ function animation(){
     animationMario();
     animationGround();
     animationPipe();
-    collision();
-    scoreUpdate();
 }
 
 function animationMario(){
@@ -156,7 +162,7 @@ function random(){
 
 //--------COLLISION
 function collision(){
-    if(pipe.positionX >= mario.positionX && pipe.positionX <= mario.positionX + 25){
+    if(pipe.positionX +40  >= mario.positionX && pipe.positionX <= mario.positionX + 25){
         if(mario.positionY>= pipe.positionY -40){
             level.finish = true;
             level.speed = 0;
@@ -168,6 +174,36 @@ function collision(){
 
 //---------SCORE AND LEVEL UPDATE
 function scoreUpdate(){
-    
+    ctx.font = "17px super_mario";
+    ctx.fillStyle="#FFD700";
+    ctx.lineWidth="2";
+    ctx.strokeStyle= "#000000";
+    ctx.fillText(`HS: ${user.highScore} m, Score: ${level.score} m`,300,30)
+    ctx.strokeText(`HS: ${user.highScore} m, Score: ${level.score} m`,300,30)
+    if(level.finish){
+        ctx.font = "30px super_mario";
+        ctx.lineWidth="3";
+        ctx.fillStyle="#FFD700";
+        ctx.fillText(`GAME OVER`,200,135)
+        ctx.strokeText(`GAME OVER`,200,135)
+        updateLocalStorage(level.score)
+    }else{
+        level.score++
+    }
 }
+
+
+//--------LOCALSTORAGE
+
+function updateLocalStorage(hs){
+    if(user.highScore<hs){
+        user.highScore= hs;
+    }
+    localStorage.setItem('user',JSON.stringify(user));
+}
+
+function getLocalStorage(){
+    user= JSON.parse(localStorage.getItem('user'));
+}
+
 
