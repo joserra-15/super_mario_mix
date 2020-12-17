@@ -2,20 +2,28 @@
 let canvas,ctx;
 const width= 600;
 const height= 300;
-let marioSprite, groundImg, pipeImg;
+let marioSprite, groundImg, pipeImg, cloudImg;
 const pipe={positionX: width+100, positionY: 215}
+const clouds={cloud1:{
+    positionX: width+random(),
+    positionY: 100,
+},cloud2: {
+    positionX: width+random()*2,
+    positionY: 150,
+}}
 const ground={positionX: 0}
 const mario={animation: 16, vx: 0, vy: 0, gravity: 2, jump: 20, vymax: 9, jumping: false, positionX: 50,positionY: 227}
 const level={speed: 9, score: 0, finish: false}
 let user={name: "jose", highScore: 0}
 let FPS=20;
+let playGame;
 const audioJump=document.getElementById("audio_jump");
 
 document.addEventListener('load', start());
 
 function start(){
     getLocalStorage();
-    let playGame = setInterval(function(){
+    playGame = setInterval(function(){
         main();
     },1000/FPS)
 }
@@ -75,9 +83,11 @@ function loadImage(){
     marioSprite = new Image();
     groundImg=new Image();
     pipeImg=new Image();
+    cloudImg=new Image();
     marioSprite.src= '../../assets/img/smallmariosheet.png';
     groundImg.src='../../assets/img/background.png'
-    pipeImg.src='../../assets/img/mapsheet.png'
+    pipeImg.src='../../assets/img/tiles.png'
+    cloudImg.src='../../assets/img/tiles.png'
 }
 
 //---------CLEAR CANVAS
@@ -91,6 +101,7 @@ function printAll(){
     printMap();
     printMario();
     printPipe();
+    printCloud();
 }
 
 function printMario(){
@@ -102,9 +113,13 @@ function printMap(){
 }
 
 function printPipe(){
-    ctx.drawImage(pipeImg,160,0,32,32,pipe.positionX,pipe.positionY,40,40)
+    ctx.drawImage(pipeImg,0,128,32,32,pipe.positionX,pipe.positionY,40,40)
 }
 
+function printCloud(){
+    ctx.drawImage(cloudImg,8,320,32,32,clouds.cloud1.positionX,clouds.cloud1.positionY,32,32);
+    ctx.drawImage(cloudImg,8,320,32,32,clouds.cloud2.positionX,clouds.cloud2.positionY,32,32);
+}
 
 
 //-------ANIMATIONS
@@ -113,6 +128,7 @@ function animation(){
     animationMario();
     animationGround();
     animationPipe();
+    animationClouds();
 }
 
 function animationMario(){
@@ -143,7 +159,7 @@ function animationGround(){
     }
 }
 function animationPipe(){
-    if(pipe.positionX>0){
+    if(pipe.positionX>-40){
         if(level.finish===false){
             pipe.positionX-= level.speed - 0.18
         }
@@ -154,10 +170,23 @@ function animationPipe(){
         mario.jump++
     }
 }
-
+function animationClouds(){
+    if(clouds.cloud1.positionX>-32){
+        clouds.cloud1.positionX-=level.speed/2
+    }else{
+        clouds.cloud1.positionX=width + random();
+        clouds.cloud1.positionY=random();
+    }
+    if(clouds.cloud2.positionX>-32){
+        clouds.cloud2.positionX-=level.speed/2
+    }else{
+        clouds.cloud2.positionX=width + random()*2;
+        clouds.cloud2.positionY=random();
+    }
+}
 function random(){
     let random= Math.random()
-    return Math.round(random*100)
+    return Math.round(random*200)
 }
 
 //--------COLLISION
