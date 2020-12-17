@@ -5,11 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My project</title>
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="shortcut icon" href="#" />
 </head>
 <body class="body">
     <main class="main">
-        <section id="menu"></section>
-        <canvas id="canvas"></canvas>
+        <section id="menu" class="menu">
+            <h1>super mario mix</h1>
+            <input type="text">
+            <h2>TOP-</h2>
+            <button id="chrome_start">mario chrome</button>
+            <button id="ranking">ranking</button>
+            <button id="user">select user</button>
+            <button id="options">options</button>
+        </section>
+
+        <canvas id="canvas" class="hidden"></canvas>
+        <!--- DESIGN -->
         <section id="power_circle"></section>
         <p id="power_text">BATTERY</p>
         <section id="lines_lila_left"></section>
@@ -21,7 +32,8 @@
     </main>
     <audio id="audio_jump" src="./assets/audios/jump.mp3"></audio>
     <audio id="audio_dead" src="./assets/audios/mario_dead.mp3"></audio>
-    <script src="assets/js/main.js"></script>
-    <script src=""></script>
+    <script src="assets/js/globalVariable.js"></script>
+    <script src="assets/js/marioChrome.js"></script>
+    <script src="assets/js/menu.js"></script>
 </body>
 </html>

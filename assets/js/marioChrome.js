@@ -1,30 +1,10 @@
 
-let canvas,ctx;
-const width= 600;
-const height= 300;
-let marioSprite, groundImg, pipeImg, cloudImg;
-const pipe={positionX: width+100, positionY: 215}
-const clouds={cloud1:{
-    positionX: width+random(),
-    positionY: 100,
-},cloud2: {
-    positionX: width+random()*2,
-    positionY: 150,
-}}
-const ground={positionX: 0}
-const mario={animation: 16, vx: 0, vy: 0, gravity: 2, jump: 20, vymax: 9, jumping: false, positionX: 50,positionY: 227}
-const level={speed: 9, score: 0, finish: false}
-let user={name: "jose", highScore: 0}
-let FPS=20;
-let playGame;
-const audioJump=document.getElementById("audio_jump");
-const audioDead=document.getElementById("audio_dead");
-
-document.addEventListener('load', start());
+//document.addEventListener('load', start());
 
 function start(){
     getLocalStorage();
     playGame = setInterval(function(){
+        console.log("aqui")
         main();
     },1000/FPS)
 }
@@ -33,14 +13,11 @@ function start(){
 //--------JUMP
 document.addEventListener('keydown',(event) => {
     if(event.code == 'Space'){
+        event.preventDefault();
         jump()
     }
 })
-document.addEventListener('click', e=>{
-    if(e.target.id==="canvas"){
-        jump();
-    }
-})
+
 
 function jump(){
     if(mario.jumping === false){
@@ -73,6 +50,7 @@ function main(){
     printAll();
     collision();
     scoreUpdate();
+    finishPlayGame();
 }
 //-------INITIATION
 function initiation(){
@@ -240,3 +218,31 @@ function getLocalStorage(){
 }
 
 
+function finishPlayGame(){
+    if(level.finish===true){
+        clearInterval(playGame);
+        resetMarioChrome();
+        setTimeout(()=>{
+            menu.classList.toggle('hidden');
+            document.getElementById('canvas').classList.toggle('hidden');
+        },6000)
+    }
+}
+
+function resetMarioChrome(){
+    pipe.positionX= width+random();
+    pipe.positionY= 215;
+    clouds.cloud1.positionX=width+random();
+    clouds.cloud2.positionX=width+random()*2;
+    ground.positionX=0;
+    mario.animation=16;
+    mario.vy=0;
+    mario.gravity=2;
+    mario.jump=20;
+    mario.jumping=false;
+    mario.positionX=50;
+    mario.positionY=227;
+    level.speed=9;
+    level.score=0;
+    level.finish=false;
+}

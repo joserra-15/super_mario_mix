@@ -103,3 +103,45 @@
     color: #32235a;
 
 }
+
+.menu{
+    width: 600px;
+    height: 300px;
+    border-color: #75767e ;
+    border-width: 60px;
+    border-style: solid;
+    border-radius: 10px;
+    border-bottom-right-radius: 100px;
+    box-shadow: 0 0 3pt 2pt #63605b;
+    background-color: rgba(48, 98, 48,0.5);
+    font-family: 'gameboy', monospace;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #0f380f;
+}
+.menu button{
+    border: none;
+    background-color: transparent;
+    font-family: 'gameboy', monospace;
+    font-weight: bold;
+    color: #0f380f;
+}
+.menu input{
+    background-color: transparent;
+    border: none;
+}
+.menu button:hover{
+    background-color: #0f380f;
+    color: #9bbc0f;
+}
+.menu button:focus{
+    outline: none;
+    background-color: #0f380f;
+    color: #9bbc0f;
+}
+
+.hidden{
+    display: none;
+}
