@@ -1,8 +1,8 @@
 const chromeStart=document.getElementById('chrome_start');
 const usernameInput=document.getElementById('username');
 const topData=document.querySelector('.menu h2');
-const menu=document.getElementById('menu')
-const selectUsername=document.getElementById('select_user')
+const menu=document.getElementById('menu');
+const selectUsername=document.getElementById('select_user');
 //---.AUDIO
 const audioJump=document.getElementById("audio_jump");
 const audioDead=document.getElementById("audio_dead");

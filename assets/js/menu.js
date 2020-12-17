@@ -13,10 +13,23 @@ function marioChrome(e){
     start();
 }
 
-selectUsername.addEventListener(`click`,activateUsername);
+
+selectUsername.addEventListener('click',activateUsername);
 
 function activateUsername(e){
     e.preventDefault();
-    usernameInput.setAttribute("disabled","false");
-    usernameInput.setAttribute("onfocus","true");
+    usernameInput.disabled = false;
+    usernameInput.value="";
+    usernameInput.focus();
+}
+
+usernameInput.addEventListener('blur', validationUser)
+
+function validationUser(){
+    if(usernameInput.value!=="" || usernameInput.value !== "Empty field"){
+
+    }else{
+        usernameInput.value=  "Empty field"
+        usernameInput.focus()
+    }
 }
