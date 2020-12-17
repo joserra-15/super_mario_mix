@@ -204,24 +204,13 @@ function scoreUpdate(){
 }
 
 
-//--------LOCALSTORAGE
-
-function updateLocalStorage(hs){
-    if(user.highScore<hs){
-        user.highScore= hs;
-    }
-    localStorage.setItem('user',JSON.stringify(user));
-}
-
-function getLocalStorage(){
-    user= JSON.parse(localStorage.getItem('user'));
-}
-
+//----------FINISH AND RESET
 
 function finishPlayGame(){
     if(level.finish===true){
         clearInterval(playGame);
         resetMarioChrome();
+        topData.textContent= `TOP - ${user.highScore} M`;
         setTimeout(()=>{
             menu.classList.toggle('hidden');
             document.getElementById('canvas').classList.toggle('hidden');
@@ -245,4 +234,17 @@ function resetMarioChrome(){
     level.speed=9;
     level.score=0;
     level.finish=false;
+}
+
+//--------LOCALSTORAGE
+
+function updateLocalStorage(hs){
+    if(user.highScore<hs){
+        user.highScore= hs;
+    }
+    localStorage.setItem('user',JSON.stringify(user));
+}
+
+function getLocalStorage(){
+    user= JSON.parse(localStorage.getItem('user'));
 }

@@ -104,6 +104,8 @@
 
 }
 
+
+/*------MENU-----------*/
 .menu{
     width: 600px;
     height: 300px;
@@ -131,6 +133,15 @@
 .menu input{
     background-color: transparent;
     border: none;
+    font-family: 'gameboy', monospace;
+    font-weight: bold;
+    color: #0f380f;
+    font-size: 1.5em;
+    width: 100%;
+    text-align: center;
+}
+.menu h2{
+    font-size: 1em;
 }
 .menu button:hover{
     background-color: #0f380f;
@@ -142,6 +153,13 @@
     color: #9bbc0f;
 }
 
+.menu input:focus{
+    outline: none;
+    background-color: #0f380f;
+    color: #9bbc0f;
+}
+
+/*------------HIDDEN CLASS----------*/
 .hidden{
     display: none;
 }
