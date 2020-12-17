@@ -118,8 +118,8 @@ function printPipe(){
 }
 
 function printCloud(){
-    ctx.drawImage(cloudImg,8,320,32,32,clouds.cloud1.positionX,clouds.cloud1.positionY,32,32);
-    ctx.drawImage(cloudImg,8,320,32,32,clouds.cloud2.positionX,clouds.cloud2.positionY,32,32);
+    ctx.drawImage(cloudImg,64,336,16,16,clouds.cloud1.positionX,clouds.cloud1.positionY,16,16);
+    ctx.drawImage(cloudImg,64,336,16,16,clouds.cloud2.positionX,clouds.cloud2.positionY,16,16);
 }
 
 
@@ -211,8 +211,8 @@ function scoreUpdate(){
     ctx.fillStyle="#FFD700";
     ctx.lineWidth="2";
     ctx.strokeStyle= "#000000";
-    ctx.fillText(`HS: ${user.highScore} m, Score: ${level.score} m`,300,30)
-    ctx.strokeText(`HS: ${user.highScore} m, Score: ${level.score} m`,300,30)
+    ctx.fillText(`HS: ${user.highScore} m Score: ${level.score} m`,300,30)
+    ctx.strokeText(`HS: ${user.highScore} m Score: ${level.score} m`,300,30)
     if(level.finish){
         ctx.font = "30px super_mario";
         ctx.lineWidth="3";
