@@ -18,6 +18,7 @@ let user={name: "jose", highScore: 0}
 let FPS=20;
 let playGame;
 const audioJump=document.getElementById("audio_jump");
+const audioDead=document.getElementById("audio_dead");
 
 document.addEventListener('load', start());
 
@@ -99,9 +100,9 @@ function cleanCanvas(){
 //----------PRINTS IN CANVAS
 function printAll(){
     printMap();
+    printCloud();
     printMario();
     printPipe();
-    printCloud();
 }
 
 function printMario(){
@@ -193,6 +194,9 @@ function random(){
 function collision(){
     if(pipe.positionX +40  >= mario.positionX && pipe.positionX <= mario.positionX + 25){
         if(mario.positionY>= pipe.positionY -40){
+            if(level.finish===false){
+                audioDead.play();
+            }
             level.finish = true;
             level.speed = 0;
             mario.animation=0;
