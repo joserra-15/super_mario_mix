@@ -213,7 +213,7 @@ function finishPlayGame(){
             menu.classList.toggle('hidden');
             document.getElementById('canvas').classList.toggle('hidden');
             menuButtons.children[0].focus()
-        },6000)
+        },3000)
     }
 }
 

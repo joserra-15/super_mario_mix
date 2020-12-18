@@ -1,5 +1,9 @@
 let validation={username: false, password: false}
-getLocalStorage();
+if(JSON.parse(localStorage.getItem('users'))===null){
+    localStorage.setItem('users',JSON.stringify(users));
+}else{
+    getLocalStorage()
+}
 usernameInput.focus()
 usernameInput.addEventListener('blur', validationUser)
 passwordInput.addEventListener('blur', validationUser)
@@ -73,23 +77,27 @@ function checkValidation(e){
 
 function checkUser(username, userPass){
     let value=""
-    users.forEach(e=>{
-        if(e.name===username){
-            if(decryptPassword(e.password)===userPass){
-                userActive=e
-                value= "true";
-            }else{
-                passwordInput.value=""
-                passwordInput.setAttribute('placeholder', 'Incorrect password')
-                validation.password=false;
-                value= "passIncorrect";
-            }
-        }
-    })
-    if(value===""){
+    if(users.length===0){
         return "false"
     }else{
-        return value
+        users.forEach(e=>{
+            if(e.name===username){
+                if(decryptPassword(e.password)===userPass){
+                    userActive=e
+                    value= "true";
+                }else{
+                    passwordInput.value=""
+                    passwordInput.setAttribute('placeholder', 'Incorrect password')
+                    validation.password=false;
+                    value= "passIncorrect";
+                }
+            }
+        })
+        if(value===""){
+            return "false"
+        }else{
+            return value
+        }
     }
 }
 
