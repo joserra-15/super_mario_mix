@@ -62,6 +62,19 @@ function showOptions(e){
     removeListenerMenuButtons()
     document.getElementById("back").addEventListener('click',goToMenu)
     document.getElementById("delete_user").addEventListener('click',displayDeleteUser)
+    document.getElementById("instruction").addEventListener('click',showInstruction)
+
+}
+
+function showInstruction(e){
+    e.preventDefault();
+    document.getElementById("back").removeEventListener('click',goToMenu)
+    document.getElementById("delete_user").removeEventListener('click',displayDeleteUser)
+    document.getElementById("instruction").removeEventListener('click',showInstruction)
+    sectionEmpty.innerHTML=""
+    sectionEmpty.insertAdjacentHTML("beforeend",`<button id="back">back</button>`)
+    sectionEmpty.insertAdjacentHTML("beforeend",`<p>Chrome Mario: Press the space Bar and Mario will jump over the obstacles in your path. The longer you play, the faster Mario runs/the ground moves. Once you crash into something, the game is over and you have to restart.</p>`)
+    document.getElementById("back").addEventListener('click',goToMenu)
 
 }
 
