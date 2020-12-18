@@ -6,14 +6,15 @@ const chromeStart=document.getElementById('chrome_start');
 const usernameInput=document.getElementById('username');
 const passwordInput=document.getElementById('password');
 const submitInput=document.getElementById('validation_user');
-const formUser=document.getElementById('formUser')
+const formUser=document.getElementById('formUser');
 //MENU
 const menu=document.getElementById('menu');
 const selectUsername=document.getElementById('select_user');
 const menuButtons=document.getElementById('menuButtons');
 const userData=document.getElementById("userData");
 const ranking=document.getElementById("ranking");
-const rankingTable=document.querySelector(".ranking__table");
+const options=document.getElementById("options");
+const sectionEmpty=document.querySelector(".section__empty");
 
 
 //------AUDIO

@@ -5,18 +5,17 @@ if(JSON.parse(localStorage.getItem('users'))===null){
     getLocalStorage()
 }
 usernameInput.focus()
-usernameInput.addEventListener('blur', validationUser)
-passwordInput.addEventListener('blur', validationUser)
+addformListener()
 
 function validationUser(e){
     switch(e.target.name){
         case "username":
             if(e.target.value!==""){
-                if(e.target.value.length <= 18 && e.target.value.length>=3){
+                if(e.target.value.length <= 10 && e.target.value.length>=3){
                     validation.username=true;
                 }else{
                     e.target.value=""
-                    e.target.setAttribute('placeholder', 'Min 3 or Max 18 letters')
+                    e.target.setAttribute('placeholder', 'Min 3 or Max 10 letters')
                     validation.username=false;
                 }
             }else{
@@ -27,11 +26,11 @@ function validationUser(e){
             break
         case "password":
             if(e.target.value!==""){
-                if(e.target.value.length <= 18 && e.target.value.length>=5){
+                if(e.target.value.length <= 10 && e.target.value.length>=5){
                     validation.password=true;
                 }else{
                     e.target.value=""
-                    e.target.setAttribute('placeholder', 'Min 5 or Max 18 letters')
+                    e.target.setAttribute('placeholder', 'Min 5 or Max 10 letters')
                     validation.password=false;
                 }
             }else{
@@ -45,7 +44,7 @@ function validationUser(e){
     }
 }
 
-submitInput.addEventListener("click",checkValidation)
+
 
 
 function checkValidation(e){
@@ -58,6 +57,8 @@ function checkValidation(e){
                 passwordInput.value="";
                 formUser.classList.add("hidden");
                 menuButtons.classList.remove("hidden");
+                addListenerMenuButtons()
+                removeformListener()
                 chromeStart.focus();
                 userData.textContent=`USERNAME: ${userActive.name} HS: ${userActive.highScore} M`
             }else if(result==="passIncorrect"){
@@ -68,6 +69,8 @@ function checkValidation(e){
                 passwordInput.value="";
                 formUser.classList.add("hidden");
                 menuButtons.classList.remove("hidden");
+                addListenerMenuButtons()
+                removeformListener()
                 chromeStart.focus();
                 userData.textContent=`USERNAME: ${userActive.name} HS: ${userActive.highScore} M`
             }
@@ -133,4 +136,16 @@ function decryptPassword(pass){
         i--
     }
     return pass;
+}
+
+function addformListener(){
+    submitInput.addEventListener("click",checkValidation)
+    usernameInput.addEventListener('blur', validationUser)
+    passwordInput.addEventListener('blur', validationUser)
+}
+
+function removeformListener(){
+    submitInput.removeEventListener("click",checkValidation)
+    usernameInput.removeEventListener('blur', validationUser)
+    passwordInput.removeEventListener('blur', validationUser)
 }

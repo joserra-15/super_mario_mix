@@ -176,7 +176,7 @@
     border: solid 3px #0f380f
 }
 
-.ranking__table{
+.section__empty{
     display: flex;
     flex-direction: column;
     border: double 3px #0f380f;
@@ -187,10 +187,10 @@
     align-items: center;
 
 }
-.ranking__table::-webkit-scrollbar {
+.section__empty::-webkit-scrollbar {
     background-color: transparent;
 }
-.ranking__table::-webkit-scrollbar-thumb {
+.section__empty::-webkit-scrollbar-thumb {
     background-color: #0f380f;
 }
 /*------------HIDDEN CLASS----------*/
