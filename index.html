@@ -11,12 +11,19 @@
     <main class="main">
         <section id="menu" class="menu">
             <h1>super mario mix</h1>
-            <input id="username" type="text" maxlength="18" disabled>
-            <h2></h2>
-            <button id="chrome_start">mario chrome</button>
-            <button id="ranking">ranking</button>
-            <button id="select_user">select username</button>
-            <button id="options">options</button>
+            <form action="#" id="form__user">
+                <label for="username">username</label>
+                <input id="username" name="username" type="text" maxlength="18" minlength="3">
+                <label for="username">password</label>
+                <input type="password" id="password" name="password" maxlength="18" minlength="5">
+                <input type="submit" id="validation_user" value="confirm"></input>
+            </form>
+            <section id="menu__buttons" class="hidden">
+                <button id="chrome_start">mario chrome</button>
+                <button id="ranking">ranking</button>
+                <button id="select_user">select username</button>
+                <button id="options">options</button>
+            </section>
         </section>
 
         <canvas id="canvas" class="hidden"></canvas>
@@ -34,6 +41,7 @@
     <audio id="audio_dead" src="./assets/audios/mario_dead.mp3"></audio>
     <script src="assets/js/globalVariable.js"></script>
     <script src="assets/js/marioChrome.js"></script>
+    <script src="assets/js/validationUser.js"></script>
     <script src="assets/js/menu.js"></script>
 </body>
 </html>

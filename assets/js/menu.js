@@ -1,8 +1,9 @@
 
-getLocalStorage()
-usernameInput.setAttribute("value", user.name);
-topData.textContent= `TOP - ${user.highScore} M`;
+//getLocalStorage()
+//usernameInput.setAttribute("value", user.name);
+//topData.textContent= `TOP - ${user.highScore} M`;
 chromeStart.addEventListener('click',marioChrome);
+
 
 function marioChrome(e){
     e.preventDefault()
@@ -18,18 +19,8 @@ selectUsername.addEventListener('click',activateUsername);
 
 function activateUsername(e){
     e.preventDefault();
-    usernameInput.disabled = false;
+    formUser.classList.toggle('hidden');
     usernameInput.value="";
     usernameInput.focus();
 }
 
-usernameInput.addEventListener('blur', validationUser)
-
-function validationUser(){
-    if(usernameInput.value!=="" || usernameInput.value !== "Empty field"){
-
-    }else{
-        usernameInput.value=  "Empty field"
-        usernameInput.focus()
-    }
-}

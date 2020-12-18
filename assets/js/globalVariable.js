@@ -1,12 +1,21 @@
 const chromeStart=document.getElementById('chrome_start');
+
+//------ELEMENTS
+
+//FORM
 const usernameInput=document.getElementById('username');
-const topData=document.querySelector('.menu h2');
+const passwordInput=document.getElementById('password');
+const submitInput=document.getElementById('validation_user');
+const formUser=document.getElementById('form__user')
+//MENU
 const menu=document.getElementById('menu');
 const selectUsername=document.getElementById('select_user');
-//---.AUDIO
+const menuButtons=document.getElementById('menu__buttons');
+
+//------AUDIO
 const audioJump=document.getElementById("audio_jump");
 const audioDead=document.getElementById("audio_dead");
-//--- CANVAS AND CONTEXT
+//-----CANVAS AND CONTEXT
 let canvas,ctx;
 const width= 600;
 const height= 300;
@@ -29,4 +38,6 @@ let FPS=20;
 
 
 //----USERS
-let user={name: "jose", highScore: 0}
+let userActive={name: "jose", highScore: 0 , password: ""}
+let users=[{name: "jose", highScore: 0 , password: ""},]
+

@@ -189,8 +189,8 @@ function scoreUpdate(){
     ctx.fillStyle="#FFD700";
     ctx.lineWidth="2";
     ctx.strokeStyle= "#000000";
-    ctx.fillText(`HS: ${user.highScore} m Score: ${level.score} m`,300,30)
-    ctx.strokeText(`HS: ${user.highScore} m Score: ${level.score} m`,300,30)
+    ctx.fillText(`HS: ${userActive.highScore} m Score: ${level.score} m`,300,30)
+    ctx.strokeText(`HS: ${userActive.highScore} m Score: ${level.score} m`,300,30)
     if(level.finish){
         ctx.font = "30px super_mario";
         ctx.lineWidth="3";
@@ -210,7 +210,7 @@ function finishPlayGame(){
     if(level.finish===true){
         clearInterval(playGame);
         resetMarioChrome();
-        topData.textContent= `TOP - ${user.highScore} M`;
+        topData.textContent= `TOP - ${userActive.highScore} M`;
         setTimeout(()=>{
             menu.classList.toggle('hidden');
             document.getElementById('canvas').classList.toggle('hidden');
@@ -239,12 +239,12 @@ function resetMarioChrome(){
 //--------LOCALSTORAGE
 
 function updateLocalStorage(hs){
-    if(user.highScore<hs){
-        user.highScore= hs;
+    if(userActive.highScore<hs){
+        userActive.highScore= hs;
     }
-    localStorage.setItem('user',JSON.stringify(user));
+    localStorage.setItem('user',JSON.stringify(user));//TODO
 }
 
 function getLocalStorage(){
-    user= JSON.parse(localStorage.getItem('user'));
+    user= JSON.parse(localStorage.getItem('user'));//TODO
 }

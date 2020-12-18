@@ -123,6 +123,9 @@
     align-items: center;
     color: #0f380f;
 }
+.menu h1{
+    border: double 3px #0f380f
+}
 .menu button{
     border: none;
     background-color: transparent;
@@ -130,19 +133,8 @@
     font-weight: bold;
     color: #0f380f;
 }
-.menu input{
-    background-color: transparent;
-    border: none;
-    font-family: 'gameboy', monospace;
-    font-weight: bold;
-    color: #0f380f;
-    font-size: 1.5em;
-    width: 100%;
-    text-align: center;
-}
-.menu h2{
-    font-size: 1em;
-}
+
+
 .menu button:hover{
     background-color: #0f380f;
     color: #9bbc0f;
@@ -153,11 +145,34 @@
     color: #9bbc0f;
 }
 
+.menu input{
+    background-color: transparent;
+    border: none;
+    font-family: 'gameboy', monospace;
+    font-weight: bold;
+    color: #0f380f;
+    font-size: 1.5em;
+    width: 90%;
+    text-align: center;
+}
+
 .menu input:focus{
     outline: none;
     background-color: #0f380f;
     color: #9bbc0f;
 }
+
+.menu input:hover{
+    outline: none;
+    background-color: #0f380f;
+    color: #9bbc0f;
+}
+
+.menu input:placeholder-shown{
+    border: solid 3px #0f380f
+}
+
+
 
 /*------------HIDDEN CLASS----------*/
 .hidden{
