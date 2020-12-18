@@ -134,6 +134,10 @@
     color: #0f380f;
 }
 
+.menu__buttons{
+    display: flex;
+    flex-direction: column;
+}
 
 .menu button:hover{
     background-color: #0f380f;

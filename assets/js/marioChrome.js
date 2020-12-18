@@ -210,10 +210,11 @@ function finishPlayGame(){
     if(level.finish===true){
         clearInterval(playGame);
         resetMarioChrome();
-        topData.textContent= `TOP - ${userActive.highScore} M`;
+        userData.textContent=`USERNAME: ${userActive.name} HS: ${userActive.highScore} M`
         setTimeout(()=>{
             menu.classList.toggle('hidden');
             document.getElementById('canvas').classList.toggle('hidden');
+            menuButtons.children[0].focus()
         },6000)
     }
 }
@@ -241,10 +242,15 @@ function resetMarioChrome(){
 function updateLocalStorage(hs){
     if(userActive.highScore<hs){
         userActive.highScore= hs;
+        users.forEach(user=>{
+            if(user.name===userActive.name){
+                user.highScore= hs
+            }
+        })
     }
-    localStorage.setItem('user',JSON.stringify(user));//TODO
+    localStorage.setItem('users',JSON.stringify(users));
 }
 
 function getLocalStorage(){
-    user= JSON.parse(localStorage.getItem('user'));//TODO
+    users= JSON.parse(localStorage.getItem('users'));
 }

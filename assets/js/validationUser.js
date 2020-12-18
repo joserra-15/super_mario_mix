@@ -1,10 +1,10 @@
 let validation={username: false, password: false}
+getLocalStorage();
 usernameInput.focus()
 usernameInput.addEventListener('blur', validationUser)
 passwordInput.addEventListener('blur', validationUser)
 
 function validationUser(e){
-    console.log(e)
     switch(e.target.name){
         case "username":
             if(e.target.value!==""){
@@ -48,17 +48,57 @@ function checkValidation(e){
     e.preventDefault()
     if(validation.username){
         if(validation.password){
-            let result=checkUser(usernameInput.value, passwordInput.value)
+            let result=checkUser(usernameInput.value, passwordInput.value);
             if(result==="true"){
-
-            }else if(result="passIncorrect"){
+                usernameInput.value="";
+                passwordInput.value="";
+                formUser.classList.add("hidden");
+                menuButtons.classList.remove("hidden");
+                chromeStart.focus();
+                userData.textContent=`USERNAME: ${userActive.name} HS: ${userActive.highScore} M`
+            }else if(result==="passIncorrect"){
                 return
-            }else if(result="false"){
+            }else if(result==="false"){
                 createNewUser(usernameInput.value, passwordInput.value)
+                usernameInput.value="";
+                passwordInput.value="";
+                formUser.classList.add("hidden");
+                menuButtons.classList.remove("hidden");
+                chromeStart.focus();
+                userData.textContent=`USERNAME: ${userActive.name} HS: ${userActive.highScore} M`
             }
         }else{passwordInput.focus()}
     }else{usernameInput.focus()}
 }
+
+function checkUser(username, userPass){
+    let value=""
+    users.forEach(e=>{
+        if(e.name===username){
+            if(decryptPassword(e.password)===userPass){
+                userActive=e
+                value= "true";
+            }else{
+                passwordInput.value=""
+                passwordInput.setAttribute('placeholder', 'Incorrect password')
+                validation.password=false;
+                value= "passIncorrect";
+            }
+        }
+    })
+    if(value===""){
+        return "false"
+    }else{
+        return value
+    }
+}
+
+function createNewUser(username,password){
+    let newUser= new User(username, 0, encryptPassword(password))
+    users.push(newUser);
+    localStorage.setItem('users',JSON.stringify(users));
+}
+
 
 function encryptPassword(pass){
     let randomNumber=random()
@@ -85,21 +125,3 @@ function decryptPassword(pass){
     }
     return pass;
 }
-
-function checkUser(username, userPass){
-    users.forEach(e=>{
-        if(e.username===username){
-            if(decryptPassword(e.password)===userPass){
-                userActive=e
-                return "true";
-            }else{
-                passwordInput.value=""
-                passwordInput.setAttribute('placeholder', 'Incorrect password')
-                validation.password=false;
-                return "passIncorrect";
-            }
-        }
-    })
-    return "false"
-}
-

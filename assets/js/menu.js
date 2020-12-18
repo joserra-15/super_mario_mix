@@ -1,7 +1,4 @@
 
-//getLocalStorage()
-//usernameInput.setAttribute("value", user.name);
-//topData.textContent= `TOP - ${user.highScore} M`;
 chromeStart.addEventListener('click',marioChrome);
 
 
@@ -20,6 +17,7 @@ selectUsername.addEventListener('click',activateUsername);
 function activateUsername(e){
     e.preventDefault();
     formUser.classList.toggle('hidden');
+    menuButtons.classList.toggle('hidden');
     usernameInput.value="";
     usernameInput.focus();
 }
