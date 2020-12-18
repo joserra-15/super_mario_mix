@@ -95,6 +95,7 @@ function checkUser(username, userPass){
 
 function createNewUser(username,password){
     let newUser= new User(username, 0, encryptPassword(password))
+    userActive=newUser;
     users.push(newUser);
     localStorage.setItem('users',JSON.stringify(users));
 }

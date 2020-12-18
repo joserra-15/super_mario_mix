@@ -176,8 +176,23 @@
     border: solid 3px #0f380f
 }
 
+.ranking__table{
+    display: flex;
+    flex-direction: column;
+    border: double 3px #0f380f;
+    width: 90%;
+    height: 70%;
+    overflow: hidden;
+    overflow-y: scroll;
+    align-items: center;
 
-
+}
+.ranking__table::-webkit-scrollbar {
+    background-color: transparent;
+}
+.ranking__table::-webkit-scrollbar-thumb {
+    background-color: #0f380f;
+}
 /*------------HIDDEN CLASS----------*/
 .hidden{
     display: none;

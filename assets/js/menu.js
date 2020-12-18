@@ -22,3 +22,24 @@ function activateUsername(e){
     usernameInput.focus();
 }
 
+ranking.addEventListener('click',showRanking)
+
+function showRanking(e){
+    e.preventDefault();
+    rankingTable.innerHTML=""
+    menuButtons.classList.toggle('hidden')
+    rankingTable.classList.toggle('hidden')
+    users=users.sort(((a,b)=>b.highScore - a.highScore))
+    for(let i=0;i<users.length;i++){
+        rankingTable.insertAdjacentHTML("beforeend",`<p>${i+1}- username: ${users[i].name} HS: ${users[i].highScore} M</p>`)
+    }
+    rankingTable.insertAdjacentHTML("afterbegin",`<button id="back">back</button>`)
+
+    document.getElementById("back").addEventListener('click',goToMenu)
+}
+
+function goToMenu(e){
+    e.preventDefault()
+    menuButtons.classList.toggle('hidden')
+    rankingTable.classList.toggle('hidden')
+}

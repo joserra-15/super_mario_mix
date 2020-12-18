@@ -11,7 +11,10 @@ const formUser=document.getElementById('formUser')
 const menu=document.getElementById('menu');
 const selectUsername=document.getElementById('select_user');
 const menuButtons=document.getElementById('menuButtons');
-const userData=document.getElementById("userData")
+const userData=document.getElementById("userData");
+const ranking=document.getElementById("ranking");
+const rankingTable=document.querySelector(".ranking__table");
+
 
 //------AUDIO
 const audioJump=document.getElementById("audio_jump");
@@ -34,7 +37,7 @@ const clouds={cloud1:{
 }}
 const ground={positionX: 0}
 const mario={animation: 16, vy: 0, gravity: 2, jump: 20, jumping: false, positionX: 50,positionY: 227}
-const level={speed: 9, score: 0, finish: false}
+const level={speed: 9, score: 0, finish: false, start: false}
 let FPS=20;
 
 

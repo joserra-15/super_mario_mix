@@ -1,10 +1,8 @@
 
-//document.addEventListener('load', start());
 
 function start(){
-    getLocalStorage();
+    level.start=true
     playGame = setInterval(function(){
-        console.log("aqui")
         main();
     },1000/FPS)
 }
@@ -12,7 +10,7 @@ function start(){
 
 //--------JUMP
 document.addEventListener('keydown',(event) => {
-    if(event.code == 'Space'){
+    if(event.code == 'Space' && level.start===true){
         event.preventDefault();
         jump()
     }
@@ -146,7 +144,7 @@ function animationPipe(){
         pipe.positionX=width + random();
         level.speed++
         mario.gravity+=0.2;
-        mario.jump++
+        mario.jump+=0.7;
     }
 }
 function animationClouds(){
@@ -170,8 +168,8 @@ function random(){
 
 //--------COLLISION
 function collision(){
-    if(pipe.positionX +40  >= mario.positionX && pipe.positionX <= mario.positionX + 25){
-        if(mario.positionY>= pipe.positionY -40){
+    if(pipe.positionX +40  >= mario.positionX -2 && pipe.positionX <= mario.positionX + 23){
+        if(mario.positionY-23>= pipe.positionY -40){
             if(level.finish===false){
                 audioDead.play();
             }
@@ -235,6 +233,7 @@ function resetMarioChrome(){
     level.speed=9;
     level.score=0;
     level.finish=false;
+    level.start=false;
 }
 
 //--------LOCALSTORAGE
