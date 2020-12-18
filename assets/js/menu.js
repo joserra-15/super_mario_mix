@@ -38,6 +38,7 @@ function showRanking(e){
     }
     sectionEmpty.insertAdjacentHTML("afterbegin",`<button id="back">back</button>`)
     removeListenerMenuButtons()
+    document.getElementById("back").focus()
     document.getElementById("back").addEventListener('click',goToMenu)
 }
 
@@ -60,6 +61,7 @@ function showOptions(e){
     sectionEmpty.insertAdjacentHTML("beforeend",`<button id="delete_user">Delete user</button>`)
     sectionEmpty.insertAdjacentHTML("beforeend",`<button id="instruction">instruction</button>`)
     removeListenerMenuButtons()
+    document.getElementById("back").focus()
     document.getElementById("back").addEventListener('click',goToMenu)
     document.getElementById("delete_user").addEventListener('click',displayDeleteUser)
     document.getElementById("instruction").addEventListener('click',showInstruction)
@@ -74,6 +76,7 @@ function showInstruction(e){
     sectionEmpty.innerHTML=""
     sectionEmpty.insertAdjacentHTML("beforeend",`<button id="back">back</button>`)
     sectionEmpty.insertAdjacentHTML("beforeend",`<p>Chrome Mario: Press the space Bar and Mario will jump over the obstacles in your path. The longer you play, the faster Mario runs/the ground moves. Once you crash into something, the game is over and you have to restart.</p>`)
+    document.getElementById("back").focus()
     document.getElementById("back").addEventListener('click',goToMenu)
 
 }
@@ -86,7 +89,7 @@ function displayDeleteUser(e){
     sectionEmpty.insertAdjacentHTML("beforeend",`<p>HS: ${userActive.highScore} M </p>`)
     sectionEmpty.insertAdjacentHTML("beforeend",`<button id="back">No</button>`)
     sectionEmpty.insertAdjacentHTML("beforeend",`<button id="yes">yes</button>`)
-
+    document.getElementById("back").focus()
     document.getElementById("back").addEventListener('click',goToMenu)
     document.getElementById("yes").addEventListener('click',deleteUser)
 

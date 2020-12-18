@@ -23,6 +23,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    text-align: center;
 }
 #canvas{
     border-color: #75767e ;
@@ -124,7 +125,9 @@
     color: #0f380f;
 }
 .menu h1{
-    border: double 3px #0f380f
+    border: double 3px #0f380f;
+    padding: 0px 5px;
+    box-shadow: 2pt 2pt 1pt 2pt #0f380f;
 }
 .menu button{
     border: none;
@@ -151,13 +154,16 @@
 
 .menu input{
     background-color: transparent;
-    border: none;
+    border: solid 3px #0f380f;
     font-family: 'gameboy', monospace;
     font-weight: bold;
     color: #0f380f;
     font-size: 1.5em;
     width: 90%;
     text-align: center;
+}
+#validation_user{
+    border: none;
 }
 
 .menu input:focus{
