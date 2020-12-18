@@ -9,12 +9,6 @@ function start(){
 
 
 //--------JUMP
-document.addEventListener('keydown',(event) => {
-    if(event.code == 'Space' && level.start===true){
-        event.preventDefault();
-        jump()
-    }
-})
 
 
 function jump(){

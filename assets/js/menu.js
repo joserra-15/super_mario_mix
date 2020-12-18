@@ -12,6 +12,15 @@ function marioChrome(e){
     start();
 }
 
+function marioInvaders(e){
+    e.preventDefault()
+    setTimeout(()=>{
+        menu.classList.toggle('hidden');
+        document.getElementById('canvas').classList.toggle('hidden');
+        removeListenerMenuButtons()
+    },1000/FPS)
+    startInvaders();
+}
 
 
 
@@ -127,6 +136,7 @@ function removeListenerMenuButtons(){
 function addListenerMenuButtons(){
     selectUsername.addEventListener('click',activateUsername);
     chromeStart.addEventListener('click',marioChrome);
+    invadersStart.addEventListener('click',marioInvaders);
     options.addEventListener('click',showOptions)
     ranking.addEventListener('click',showRanking)
     selectUsername.addEventListener('click',activateUsername);

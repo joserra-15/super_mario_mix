@@ -1,4 +1,5 @@
 const chromeStart=document.getElementById('chrome_start');
+const invadersStart=document.getElementById('invaders_start');
 
 //------ELEMENTS
 
@@ -41,6 +42,9 @@ const mario={animation: 16, vy: 0, gravity: 2, jump: 20, jumping: false, positio
 const level={speed: 9, score: 0, finish: false, start: false}
 let FPS=20;
 
+
+//-----MARIO INVADERS
+let playGameInvader
 
 //----USERS
 let userActive={name: "jose", highScore: 0 , password: ""}
