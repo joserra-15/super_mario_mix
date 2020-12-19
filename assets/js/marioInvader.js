@@ -1,6 +1,6 @@
 const levelInvaders={speed: 9, score: 0, finish: false, start: false, delayAnimation:0,timeInterval: 23000}
 let plantImage, fireballImage, squidImage
-const plant={animation: 0, speed: 5, shoot: false, positionX: 276,positionY: 250}
+const plant={animation: 0, speed: 7, shoot: false, positionX: 276,positionY: 250}
 let fireballArray=[]
 let squidArray=[]
 let createEnemy
@@ -244,13 +244,13 @@ function printFireball(){
     let time= Date.now()
     if(fireballArray.length === 0 ){
         createNewFireball(time)
-    }else if(time - 1000 > fireballArray[fireballArray.length-1].time){
+    }else if(time - 500 > fireballArray[fireballArray.length-1].time){
         createNewFireball(time)
     }
 }
 
 function createNewFireball(time){
-    let fireball= new Fireball(0, 1, time, 250, plant.positionX+6)
+    let fireball= new Fireball(0, 5, time, 250, plant.positionX+6)
     ctx.drawImage(fireballImage,fireball.animation,24,8,8,fireball.positionX,fireball.positionY,16,16)
     plant.shoot=true
     fireballArray.push(fireball);
