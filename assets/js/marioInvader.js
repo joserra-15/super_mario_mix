@@ -1,9 +1,9 @@
-const levelInvaders={speed: 9, score: 0, finish: false, start: false}
+const levelInvaders={speed: 9, score: 0, finish: false, start: false, delayAnimation:0,timeInterval: 23000}
 let plantImage, fireballImage, squidImage
 const plant={animation: 0, speed: 5, shoot: false, positionX: 276,positionY: 250}
 let fireballArray=[]
 let squidArray=[]
-let delayAnimation=0
+let createEnemy
 
 class Fireball{
     constructor(animation, vy, time, positionY, positionX){
@@ -12,6 +12,7 @@ class Fireball{
         this.time = time
         this.positionY = positionY
         this.positionX = positionX
+        this.hit=false
     }
 }
 
@@ -35,13 +36,22 @@ function startInvaders(){
 }
 
 function createInvaders(){
-    for(let i=100; i<500; i+=50){
-        for(let j=0; j<100; j+=50){
-                let newSquid= new Squid(240, i, j);
-                squidArray.push(newSquid)
+    create()
+    createEnemy=setInterval(()=>{
+        create()
+        if(levelInvaders.timeInterval>10000){
+            levelInvaders.timeInterval-=1000
+        }
+    },levelInvaders.timeInterval)
+
+    function create(){
+        for(let i=100; i<500; i+=50){
+            for(let j=0; j<100; j+=50){
+                    let newSquid= new Squid(240, i, j);
+                    squidArray.push(newSquid)
+            }
         }
     }
-    console.log(squidArray)
 }
 
 //------- MAIN FUNCTION
@@ -51,8 +61,8 @@ function mainInvader(){
     cleanCanvas();
     animationInvaders();
     printAllInvaders();
-    //collision();
-    //scoreUpdate();
+    collisionInvaders();
+    scoreUpdateInvaders();
     //finishPlayGame();
 }
 
@@ -93,9 +103,9 @@ function printMapInvaders(){
 }
 
 function printAllFireball(){
-    if(fireballArray.length===0){
-
-    }else{
+    if(fireballArray.length!==0){
+        fireballArray=fireballArray.filter(fireball=>{
+            if(fireball.positionY>=0 && fireball.hit===false){return true}else{return false}})
         fireballArray.forEach(fireball=>ctx.drawImage(fireballImage,fireball.animation,24,8,8,fireball.positionX,fireball.positionY,16,16))
     }
 }
@@ -108,24 +118,23 @@ function animationInvaders(){
 }
 
 function animationShootPlant(){
-    if(delayAnimation>2){
+    if(levelInvaders.delayAnimation>2){
         if(plant.shoot){
             plant.animation=16;
             plant.shoot=false;
         }else{
             plant.animation=0;
         }
-        delayAnimation=0
+        levelInvaders.delayAnimation=0
     }else{
-        delayAnimation++
+        levelInvaders.delayAnimation++
     }
 }
 
 function fireballAnimation(){
-    fireballArray=fireballArray.filter(fireball=>fireball.positionY>=0)
     fireballArray.forEach(fireball=>{
         fireball.positionY-=fireball.vy
-        if(delayAnimation>2){
+        if(levelInvaders.delayAnimation>2){
             if(fireball.animation===0){
                 fireball.animation=8;
             }else if(fireball.animation===8){
@@ -147,9 +156,46 @@ function squidAnimation(){
             squid.vx=-squid.vx
             squid.positionX += squid.vx
         }
+        if(levelInvaders.delayAnimation>2){
+            if(squid.animation===240){
+                squid.animation=257
+            }else if(squid.animation===257){
+                squid.animation=240
+            }
+        }
     })
 }
 
+//--------COLLISION
+function collisionInvaders(){
+    fireballArray.forEach(fireball=>{
+        squidArray.forEach(squid=>{
+            if(squid.positionY + 32 > fireball.positionY && squid.positionY < fireball.positionY + 16 && squid.positionX + 16 > fireball.positionX && squid.positionX < fireball.positionX +16){
+                squid.dead=true;
+                fireball.hit=true;
+                levelInvaders.score++;
+            }
+        }
+    )})
+}
+
+//-------SCORE UPDATE
+function scoreUpdateInvaders(){
+    ctx.font = "17px super_mario";
+    ctx.fillStyle="#FFD700";
+    ctx.lineWidth="2";
+    ctx.strokeStyle= "#000000";
+    ctx.fillText(`Score: ${levelInvaders.score}`,10,30)
+    ctx.strokeText(`Score: ${levelInvaders.score}`,10,30)
+    if(levelInvaders.finish){
+        ctx.font = "30px super_mario";
+        ctx.lineWidth="3";
+        ctx.fillStyle="#FFD700";
+        ctx.fillText(`GAME OVER`,200,135)
+        ctx.strokeText(`GAME OVER`,200,135)
+        //updateLocalStorage(level.score)
+    }
+}
 
     //------LISTENER SPACE BAR
 document.addEventListener('keydown',(event) => {
