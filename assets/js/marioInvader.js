@@ -110,7 +110,6 @@ function fireballAnimation(){
 
 
     //------LISTENER SPACE BAR
-
 document.addEventListener('keydown',(event) => {
     if(event.code == 'Space'){
         event.preventDefault();
@@ -121,7 +120,33 @@ document.addEventListener('keydown',(event) => {
             shoot()
         }
     }
+    if(event.code ==  'ArrowLeft'){
+        event.preventDefault();
+        if(levelInvaders.start){
+            moveLeft()
+        }
+    }
+    if(event.code ==  'ArrowRight'){
+        event.preventDefault();
+        if(levelInvaders.start){
+            moveRight()
+        }
+    }
 })
+
+
+
+function moveLeft(){
+    if(plant.positionX > 16){
+        plant.positionX -= plant.speed
+    }
+}
+
+function moveRight(){
+    if(plant.positionX < 584){
+        plant.positionX += plant.speed
+    }
+}
 
 function shoot(){
     printFireball()
