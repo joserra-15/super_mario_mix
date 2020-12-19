@@ -1,7 +1,8 @@
 const levelInvaders={speed: 9, score: 0, finish: false, start: false}
-let plantImage, fireballImage
+let plantImage, fireballImage, squidImage
 const plant={animation: 0, speed: 5, shoot: false, positionX: 276,positionY: 250}
 let fireballArray=[]
+let squidArray=[]
 let delayAnimation=0
 
 class Fireball{
@@ -14,11 +15,33 @@ class Fireball{
     }
 }
 
+class Squid{
+    constructor(animation, positionX, positionY){
+        this.animation= animation;
+        this.positionX= positionX;
+        this.positionY= positionY;
+        this.vy = 25;
+        this.vx = 5;
+        this.dead= false;
+    }
+}
+
 function startInvaders(){
     levelInvaders.start=true
+    createInvaders();
     playGameInvader = setInterval(function(){
         mainInvader();
     },1000/FPS)
+}
+
+function createInvaders(){
+    for(let i=100; i<500; i+=50){
+        for(let j=0; j<100; j+=50){
+                let newSquid= new Squid(240, i, j);
+                squidArray.push(newSquid)
+        }
+    }
+    console.log(squidArray)
 }
 
 //------- MAIN FUNCTION
@@ -42,8 +65,10 @@ function initiationInvaders(){
 function loadImageInvaders(){
     plantImage = new Image();
     fireballImage = new Image();
+    squidImage = new Image();
     plantImage.src= '../../assets/img/enemysheet.png';
     fireballImage.src= '../../assets/img/particlesheet.png';
+    squidImage.src= '../../assets/img/characters.gif';
 }
 
 
@@ -52,7 +77,13 @@ function printAllInvaders(){
     printMapInvaders();
     printPlant();
     printAllFireball();
+    printInvaders();
 }
+function printInvaders(){
+    squidArray = squidArray.filter(squid=>squid.dead===false)
+    squidArray.forEach(squid=>ctx.drawImage(squidImage,squid.animation,257,16,30,squid.positionX,squid.positionY,16,32))
+}
+
 function printPlant(){
     ctx.drawImage(plantImage,plant.animation,192,16,32,plant.positionX,plant.positionY,24,40)
 }
@@ -73,6 +104,7 @@ function printAllFireball(){
 function animationInvaders(){
     animationShootPlant();
     fireballAnimation();
+    squidAnimation();
 }
 
 function animationShootPlant(){
@@ -106,7 +138,17 @@ function fireballAnimation(){
         }
     })
 }
-
+function squidAnimation(){
+    squidArray.forEach(squid=>{
+        if(squid.positionX > 50 && squid.positionX < 550){
+            squid.positionX += squid.vx
+        }else{
+            squid.positionY +=squid.vy
+            squid.vx=-squid.vx
+            squid.positionX += squid.vx
+        }
+    })
+}
 
 
     //------LISTENER SPACE BAR

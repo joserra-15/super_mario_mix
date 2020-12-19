@@ -135,7 +135,7 @@ function animationPipe(){
             pipe.positionX-= level.speed - 0.18
         }
     }else{
-        pipe.positionX=width + random();
+        pipe.positionX=width + random() + level.speed*2;
         level.speed++
         mario.gravity+=0.2;
         mario.jump+=0.7;
