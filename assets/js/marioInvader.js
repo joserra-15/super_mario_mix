@@ -1,9 +1,8 @@
-const levelInvaders={speed: 9, score: 0, finish: false, start: false, delayAnimation:0,timeInterval: 23000}
+const levelInvaders={speed: 0.2, score: 0, finish: false, start: false, delayAnimation:0,}
 let plantImage, fireballImage, squidImage
 const plant={animation: 0, speed: 7, shoot: false, positionX: 276,positionY: 250}
 let fireballArray=[]
 let squidArray=[]
-let createEnemy
 
 class Fireball{
     constructor(animation, vy, time, positionY, positionX){
@@ -21,32 +20,29 @@ class Squid{
         this.animation= animation;
         this.positionX= positionX;
         this.positionY= positionY;
-        this.vy = 25;
-        this.vx = 5;
+        this.vy = 8;
+        this.vx = 2;
         this.dead= false;
     }
 }
 
 function startInvaders(){
     levelInvaders.start=true
-    createInvaders();
     playGameInvader = setInterval(function(){
         mainInvader();
     },1000/FPS)
 }
 
 function createInvaders(){
-    create()
-    createEnemy=setInterval(()=>{
+    if(squidArray.length===0){
         create()
-        if(levelInvaders.timeInterval>10000){
-            levelInvaders.timeInterval-=1000
-        }
-    },levelInvaders.timeInterval)
+        levelInvaders.speed+=0.2
+        squidArray.forEach(e=>e.vx+=levelInvaders.speed)
+    }
 
     function create(){
-        for(let i=100; i<500; i+=50){
-            for(let j=0; j<100; j+=50){
+        for(let i=100; i<500; i+=30){
+            for(let j=0; j<100; j+=30){
                     let newSquid= new Squid(240, i, j);
                     squidArray.push(newSquid)
             }
@@ -59,11 +55,12 @@ function createInvaders(){
 function mainInvader(){
     initiationInvaders();
     cleanCanvas();
+    createInvaders();
     animationInvaders();
     printAllInvaders();
     collisionInvaders();
     scoreUpdateInvaders();
-    //finishPlayGame();
+    finishPlayGameInvaders();
 }
 
 
@@ -148,13 +145,11 @@ function fireballAnimation(){
     })
 }
 function squidAnimation(){
+    let jumpLine=false
     squidArray.forEach(squid=>{
-        if(squid.positionX > 50 && squid.positionX < 550){
-            squid.positionX += squid.vx
+        if(squid.positionX > 16 && squid.positionX < 570){
         }else{
-            squid.positionY +=squid.vy
-            squid.vx=-squid.vx
-            squid.positionX += squid.vx
+            jumpLine=true
         }
         if(levelInvaders.delayAnimation>2){
             if(squid.animation===240){
@@ -162,6 +157,19 @@ function squidAnimation(){
             }else if(squid.animation===257){
                 squid.animation=240
             }
+        }
+        if(squid.positionY + 32>plant.positionY){
+            levelInvaders.finish=true
+        }
+    })
+    squidArray.forEach(squid=>{
+        if(jumpLine===false){
+            squid.positionX += squid.vx
+        }else{
+            squid.positionY +=squid.vy
+            squid.vx=-squid.vx
+            squid.positionX += squid.vx
+            squid.vx>0?squid.vx += levelInvaders.speed:squid.vx += - levelInvaders.speed
         }
     })
 }
@@ -254,4 +262,36 @@ function createNewFireball(time){
     ctx.drawImage(fireballImage,fireball.animation,24,8,8,fireball.positionX,fireball.positionY,16,16)
     plant.shoot=true
     fireballArray.push(fireball);
+}
+
+//----------FINISH AND RESET
+
+function finishPlayGameInvaders(){
+    if(levelInvaders.finish===true){
+        clearInterval(playGameInvader);
+        resetMarioInvaders();
+        setTimeout(()=>{
+            menu.classList.toggle('hidden');
+            document.getElementById('canvas').classList.toggle('hidden');
+            menuButtons.children[0].focus()
+            addListenerMenuButtons()
+        },3000)
+    }
+}
+
+function resetMarioInvaders(){
+    fireballArray=[]
+    squidArray=[]
+    ground.positionX=0;
+    plant.animation=0;
+    plant.speed=7;
+    plant.shoot=false;
+    plant.positionX=276;
+    plant.positionY=250;
+    levelInvaders.speed=0.2;
+    levelInvaders.score=0;
+    levelInvaders.finish=false;
+    levelInvaders.start=false;
+    levelInvaders.delayAnimation=0;
+
 }
