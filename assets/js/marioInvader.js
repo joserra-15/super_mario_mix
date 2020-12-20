@@ -158,7 +158,7 @@ function squidAnimation(){
                 squid.animation=240
             }
         }
-        if(squid.positionY + 32>plant.positionY){
+        if(squid.positionY + 20>plant.positionY){
             levelInvaders.finish=true
         }
     })
