@@ -21,6 +21,9 @@ const sectionEmpty=document.querySelector(".section__empty");
 //------AUDIO
 const audioJump=document.getElementById("audio_jump");
 const audioDeath=document.getElementById("audio_death");
+const audioFireball=document.getElementById("audio_fireball");
+const audioDeathAlien=document.getElementById("audio_aliens");
+const audioInvaders=document.getElementById("audio_invaders");
 //-----CANVAS AND CONTEXT
 let canvas,ctx;
 const width= 600;

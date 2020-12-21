@@ -37,6 +37,7 @@ function startInvaders(){
 function createInvaders(){
     if(squidArray.length===0){
         create()
+        fireballArray=[]
         levelInvaders.speed+=0.2
         squidArray.forEach(e=>e.vx+=levelInvaders.speed)
     }
@@ -172,6 +173,7 @@ function squidAnimation(){
             squid.vx=-squid.vx
             squid.positionX += squid.vx
             squid.vx>0?squid.vx += levelInvaders.speed:squid.vx += - levelInvaders.speed
+            audioInvaders.play()
         }
     })
 }
@@ -184,6 +186,7 @@ function collisionInvaders(){
                 squid.dead=true;
                 fireball.hit=true;
                 levelInvaders.score++;
+                audioDeathAlien.play()
             }
         }
     )})
@@ -302,6 +305,7 @@ function printFireball(){
 }
 
 function createNewFireball(time){
+    audioFireball.play()
     let fireball= new Fireball(0, 5, time, 250, plant.positionX+6)
     ctx.drawImage(fireballImage,fireball.animation,24,8,8,fireball.positionX,fireball.positionY,16,16)
     plant.shoot=true
@@ -337,5 +341,5 @@ function resetMarioInvaders(){
     levelInvaders.finish=false;
     levelInvaders.start=false;
     levelInvaders.delayAnimation=0;
-
+    keyMove.forEach(key=>key.keyPressed=false)
 }
