@@ -1,19 +1,5 @@
-/*let playGame;
-let marioSprite, groundImg, pipeImg, cloudImg;
-const pipe={positionX: width+100, positionY: 215}
-const clouds={cloud1:{
-    positionX: width+100,
-    positionY: 100,
-},cloud2: {
-    positionX: width+200,
-    positionY: 150,
-}}
-const ground={positionX: 0}
-const mario={animation: 16, vy: 0, gravity: 2, jump: 20, jumping: false, positionX: 50,positionY: 227}
-const level={speed: 9, score: 0, finish: false, start: false}
-let FPS=20;*/
-let pipeArray=[]
-let cloudsArray=[]
+
+
 class Pipe{
     constructor(){
         this.positionX= width + Math.random()
@@ -215,7 +201,7 @@ function collision(){
 //---------SCORE AND LEVEL UPDATE
 function scoreUpdate(){
     if(level.score>level.compareRound){
-        level.speed+=0.2
+        level.speed+=0.4
         level.compareRound=level.score+100
     }
     ctx.font = "17px super_mario";

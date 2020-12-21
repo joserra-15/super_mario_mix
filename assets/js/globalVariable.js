@@ -37,10 +37,18 @@ const ground={positionX: 0}
 const mario={animation: 16, vy: 0, gravity: 2, jump: 20, jumping: false, doubleJump:false, positionX: 50,positionY: 227}
 const level={speed: 9, score: 0, finish: false, start: false, compareRound: 100}
 let FPS=20;
-
+let pipeArray=[]
+let cloudsArray=[]
 
 //-----MARIO INVADERS
 let playGameInvader
+const levelInvaders={speed: 0.2, score: 0, finish: false, start: false, delayAnimation:0,}
+let plantInvadersImage, fireballImage, squidImage
+const plantInvaders={animation: 0, speed: 7, shoot: false, positionX: 276,positionY: 250}
+let fireballArray=[]
+let squidArray=[]
+let starsArray=[]
+let keyMove=[{keyName: 'Space', keyPressed: false},{keyName: 'ArrowLeft', keyPressed: false},{keyName: 'ArrowRight', keyPressed: false}]
 
 //----USERS
 let userActive={name: "jose", highScore: 0 , password: "", highScoreInvaders: 0}

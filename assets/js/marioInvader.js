@@ -1,10 +1,4 @@
-const levelInvaders={speed: 0.2, score: 0, finish: false, start: false, delayAnimation:0,}
-let plantInvadersImage, fireballImage, squidImage
-const plantInvaders={animation: 0, speed: 7, shoot: false, positionX: 276,positionY: 250}
-let fireballArray=[]
-let squidArray=[]
-let starsArray=[]
-let keyMove=[{keyName: 'Space', keyPressed: false},{keyName: 'ArrowLeft', keyPressed: false},{keyName: 'ArrowRight', keyPressed: false}]
+
 
 class Fireball{
     constructor(animation, vy, time, positionY, positionX){
