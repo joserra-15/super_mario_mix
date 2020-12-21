@@ -3,6 +3,7 @@ let plantImage, fireballImage, squidImage
 const plant={animation: 0, speed: 7, shoot: false, positionX: 276,positionY: 250}
 let fireballArray=[]
 let squidArray=[]
+let starsArray=[]
 let keyMove=[{keyName: 'Space', keyPressed: false},{keyName: 'ArrowLeft', keyPressed: false},{keyName: 'ArrowRight', keyPressed: false}]
 
 class Fireball{
@@ -26,9 +27,20 @@ class Squid{
         this.dead= false;
     }
 }
+class Star{
+    constructor(x, y, size) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+    }
+}
+
 
 function startInvaders(){
     levelInvaders.start=true
+    for (let i = 0; i < 100; i++) {
+        starsArray.push(new Star(Math.random() * width, Math.random() * height, Math.random() * 2));
+    }
     playGameInvader = setInterval(function(){
         mainInvader();
     },1000/FPS)
@@ -100,6 +112,12 @@ function printPlant(){
 
 function printMapInvaders(){
     ctx.fillRect(0, 0, 600, 300)
+    starsArray.forEach(star=>{
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fillStyle = "white";
+        ctx.fill();
+})
 }
 
 function printAllFireball(){
@@ -294,6 +312,7 @@ function finishPlayGameInvaders(){
 function resetMarioInvaders(){
     fireballArray=[]
     squidArray=[]
+    starsArray=[]
     ground.positionX=0;
     plant.animation=0;
     plant.speed=7;
