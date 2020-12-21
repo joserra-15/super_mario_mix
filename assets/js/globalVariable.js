@@ -20,7 +20,7 @@ const sectionEmpty=document.querySelector(".section__empty");
 
 //------AUDIO
 const audioJump=document.getElementById("audio_jump");
-const audioDead=document.getElementById("audio_dead");
+const audioDeath=document.getElementById("audio_death");
 //-----CANVAS AND CONTEXT
 let canvas,ctx;
 const width= 600;

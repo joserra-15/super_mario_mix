@@ -165,7 +165,7 @@ function collision(){
     if(pipe.positionX +40  >= mario.positionX -2 && pipe.positionX <= mario.positionX + 23){
         if(mario.positionY-23>= pipe.positionY -40){
             if(level.finish===false){
-                audioDead.play();
+                audioDeath.play();
             }
             level.finish = true;
             level.speed = 0;

@@ -3,6 +3,7 @@ let plantImage, fireballImage, squidImage
 const plant={animation: 0, speed: 7, shoot: false, positionX: 276,positionY: 250}
 let fireballArray=[]
 let squidArray=[]
+let keyMove=[{keyName: 'Space', keyPressed: false},{keyName: 'ArrowLeft', keyPressed: false},{keyName: 'ArrowRight', keyPressed: false}]
 
 class Fireball{
     constructor(animation, vy, time, positionY, positionX){
@@ -61,6 +62,7 @@ function mainInvader(){
     collisionInvaders();
     scoreUpdateInvaders();
     finishPlayGameInvaders();
+    keyController();
 }
 
 
@@ -213,25 +215,67 @@ document.addEventListener('keydown',(event) => {
             jump()
         }
         if(levelInvaders.start){
-            shoot()
+            keyMove[0].keyPressed=true
         }
     }
     if(event.code ==  'ArrowLeft'){
         event.preventDefault();
         if(levelInvaders.start){
-            moveLeft()
+            keyMove[1].keyPressed=true
         }
     }
     if(event.code ==  'ArrowRight'){
         event.preventDefault();
         if(levelInvaders.start){
-            moveRight()
+            keyMove[2].keyPressed=true
+        }
+    }
+})
+document.addEventListener('keyup', (event) => {
+    if(event.code == 'Space'){
+        event.preventDefault();
+        if( level.start){
+            jump()
+        }
+        if(levelInvaders.start){
+            keyMove[0].keyPressed=false
+        }
+    }
+    if(event.code ==  'ArrowLeft'){
+        event.preventDefault();
+        if(levelInvaders.start){
+            keyMove[1].keyPressed=false
+        }
+    }
+    if(event.code ==  'ArrowRight'){
+        event.preventDefault();
+        if(levelInvaders.start){
+            keyMove[2].keyPressed=false
         }
     }
 })
 
-
-
+function keyController(){
+    keyMove.forEach(key=>{
+        switch(key.keyName){
+            case "Space":
+                if(key.keyPressed){
+                    shoot()
+                }
+                break
+            case "ArrowLeft":
+                if(key.keyPressed){
+                    moveLeft()
+                }
+                break
+            case "ArrowRight":
+                if(key.keyPressed){
+                    moveRight()
+                }
+                break
+        }
+    })
+}
 function moveLeft(){
     if(plant.positionX > 16){
         plant.positionX -= plant.speed
