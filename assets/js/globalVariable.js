@@ -33,17 +33,9 @@ const height= 300;
 //---CHROME MARIO
 let playGame;
 let marioSprite, groundImg, pipeImg, cloudImg;
-const pipe={positionX: width+100, positionY: 215}
-const clouds={cloud1:{
-    positionX: width+100,
-    positionY: 100,
-},cloud2: {
-    positionX: width+200,
-    positionY: 150,
-}}
 const ground={positionX: 0}
-const mario={animation: 16, vy: 0, gravity: 2, jump: 20, jumping: false, positionX: 50,positionY: 227}
-const level={speed: 9, score: 0, finish: false, start: false}
+const mario={animation: 16, vy: 0, gravity: 2, jump: 20, jumping: false, doubleJump:false, positionX: 50,positionY: 227}
+const level={speed: 9, score: 0, finish: false, start: false, compareRound: 100}
 let FPS=20;
 
 

@@ -1,4 +1,31 @@
-
+/*let playGame;
+let marioSprite, groundImg, pipeImg, cloudImg;
+const pipe={positionX: width+100, positionY: 215}
+const clouds={cloud1:{
+    positionX: width+100,
+    positionY: 100,
+},cloud2: {
+    positionX: width+200,
+    positionY: 150,
+}}
+const ground={positionX: 0}
+const mario={animation: 16, vy: 0, gravity: 2, jump: 20, jumping: false, positionX: 50,positionY: 227}
+const level={speed: 9, score: 0, finish: false, start: false}
+let FPS=20;*/
+let pipeArray=[]
+let cloudsArray=[]
+class Pipe{
+    constructor(){
+        this.positionX= width + Math.random()
+        this.positionY= 215
+    }
+}
+class Cloud{
+    constructor(){
+        this.positionX= width + Math.random()
+        this.positionY= random()
+    }
+}
 
 function start(){
     level.start=true
@@ -16,12 +43,20 @@ function jump(){
         audioJump.play()
         mario.jumping = true;
         mario.vy = mario.jump
+    }else{
+        if(mario.doubleJump===false){
+            audioJump.play()
+            mario.doubleJump = true;
+            mario.vy=0
+            mario.vy = mario.jump/1.5
+        }
     }
 }
 function gravity(){
     if(mario.jumping){
         if(mario.positionY - mario.vy - mario.gravity > 227){
             mario.jumping=false;
+            mario.doubleJump=false;
             mario.positionY=227;
             mario.vy=0;
         }else{
@@ -84,12 +119,22 @@ function printMap(){
 }
 
 function printPipe(){
-    ctx.drawImage(pipeImg,0,128,32,32,pipe.positionX,pipe.positionY,40,40)
+    if(random()<4){
+        pipeArray.push(new Pipe)
+    }
+    if(pipeArray.length!== 0){
+        pipeArray.forEach(pipe=>{
+            ctx.drawImage(pipeImg,0,128,32,32,pipe.positionX,pipe.positionY,40,40)})
+    }
 }
 
 function printCloud(){
-    ctx.drawImage(cloudImg,64,336,16,16,clouds.cloud1.positionX,clouds.cloud1.positionY,16,16);
-    ctx.drawImage(cloudImg,64,336,16,16,clouds.cloud2.positionX,clouds.cloud2.positionY,16,16);
+    if(random()<3){
+        cloudsArray.push(new Cloud)
+    }
+    if(cloudsArray.length!=0){
+        cloudsArray.forEach(cloud=>ctx.drawImage(cloudImg,64,336,16,16,cloud.positionX,cloud.positionY,16,16))
+    }
 }
 
 
@@ -130,30 +175,20 @@ function animationGround(){
     }
 }
 function animationPipe(){
-    if(pipe.positionX>-40){
-        if(level.finish===false){
-            pipe.positionX-= level.speed - 0.18
+    pipeArray.forEach(pipe=>{
+        if(pipe.positionX>-40){
+            if(level.finish===false){
+                pipe.positionX-= level.speed - 0.18
+            }
         }
-    }else{
-        pipe.positionX=width + random() + level.speed*2;
-        level.speed++
-        mario.gravity+=0.2;
-        mario.jump+=0.7;
-    }
+    })
 }
 function animationClouds(){
-    if(clouds.cloud1.positionX>-32){
-        clouds.cloud1.positionX-=level.speed/2
-    }else{
-        clouds.cloud1.positionX=width + random();
-        clouds.cloud1.positionY=random();
-    }
-    if(clouds.cloud2.positionX>-32){
-        clouds.cloud2.positionX-=level.speed/2
-    }else{
-        clouds.cloud2.positionX=width + random()*2;
-        clouds.cloud2.positionY=random();
-    }
+    cloudsArray.forEach(cloud=>{
+        if(cloud.positionX>-32){
+            cloud.positionX-=level.speed/2
+        }
+    })
 }
 function random(){
     let random= Math.random()
@@ -162,21 +197,27 @@ function random(){
 
 //--------COLLISION
 function collision(){
-    if(pipe.positionX +40  >= mario.positionX -2 && pipe.positionX <= mario.positionX + 23){
-        if(mario.positionY-23>= pipe.positionY -40){
-            if(level.finish===false){
-                audioDeath.play();
+    pipeArray.forEach(pipe=>{
+        if(pipe.positionX + 40  >= mario.positionX -2 && pipe.positionX <= mario.positionX + 23){
+            if(mario.positionY-23>= pipe.positionY -40){
+                if(level.finish===false){
+                    audioDeath.play();
+                }
+                level.finish = true;
+                level.speed = 0;
+                mario.animation=0;
             }
-            level.finish = true;
-            level.speed = 0;
-            mario.animation=0;
         }
-    }
+    })
 }
 
 
 //---------SCORE AND LEVEL UPDATE
 function scoreUpdate(){
+    if(level.score>level.compareRound){
+        level.speed+=0.2
+        level.compareRound=level.score+100
+    }
     ctx.font = "17px super_mario";
     ctx.fillStyle="#FFD700";
     ctx.lineWidth="2";
@@ -215,10 +256,10 @@ function finishPlayGame(){
 }
 
 function resetMarioChrome(){
-    pipe.positionX= width+random();
-    pipe.positionY= 215;
-    clouds.cloud1.positionX=width+random();
-    clouds.cloud2.positionX=width+random()*2;
+    //pipe.positionX= width+random();
+    //pipe.positionY= 215;
+    pipeArray=[]
+    cloudsArray=[]
     ground.positionX=0;
     mario.animation=16;
     mario.vy=0;

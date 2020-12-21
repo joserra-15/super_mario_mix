@@ -24,9 +24,6 @@ document.addEventListener('keydown',(event) => {
 document.addEventListener('keyup', (event) => {
     if(event.code == 'Space'){
         event.preventDefault();
-        if( level.start){
-            jump()
-        }
         if(levelInvaders.start){
             keyMove[0].keyPressed=false
         }

@@ -1,6 +1,6 @@
 const levelInvaders={speed: 0.2, score: 0, finish: false, start: false, delayAnimation:0,}
-let plantImage, fireballImage, squidImage
-const plant={animation: 0, speed: 7, shoot: false, positionX: 276,positionY: 250}
+let plantInvadersImage, fireballImage, squidImage
+const plantInvaders={animation: 0, speed: 7, shoot: false, positionX: 276,positionY: 250}
 let fireballArray=[]
 let squidArray=[]
 let starsArray=[]
@@ -85,10 +85,10 @@ function initiationInvaders(){
     loadImageInvaders();
 }
 function loadImageInvaders(){
-    plantImage = new Image();
+    plantInvadersImage = new Image();
     fireballImage = new Image();
     squidImage = new Image();
-    plantImage.src= '../../assets/img/enemysheet.png';
+    plantInvadersImage.src= '../../assets/img/enemysheet.png';
     fireballImage.src= '../../assets/img/particlesheet.png';
     squidImage.src= '../../assets/img/characters.gif';
 }
@@ -97,7 +97,7 @@ function loadImageInvaders(){
 //----------PRINTS IN CANVAS
 function printAllInvaders(){
     printMapInvaders();
-    printPlant();
+    printplantInvaders();
     printAllFireball();
     printInvaders();
 }
@@ -106,8 +106,8 @@ function printInvaders(){
     squidArray.forEach(squid=>ctx.drawImage(squidImage,squid.animation,257,16,30,squid.positionX,squid.positionY,16,32))
 }
 
-function printPlant(){
-    ctx.drawImage(plantImage,plant.animation,192,16,32,plant.positionX,plant.positionY,24,40)
+function printplantInvaders(){
+    ctx.drawImage(plantInvadersImage,plantInvaders.animation,192,16,32,plantInvaders.positionX,plantInvaders.positionY,24,40)
 }
 
 function printMapInvaders(){
@@ -130,18 +130,18 @@ function printAllFireball(){
 
 //-------ANIMATIONS
 function animationInvaders(){
-    animationShootPlant();
+    animationShootplantInvaders();
     fireballAnimation();
     squidAnimation();
 }
 
-function animationShootPlant(){
+function animationShootplantInvaders(){
     if(levelInvaders.delayAnimation>2){
-        if(plant.shoot){
-            plant.animation=16;
-            plant.shoot=false;
+        if(plantInvaders.shoot){
+            plantInvaders.animation=16;
+            plantInvaders.shoot=false;
         }else{
-            plant.animation=0;
+            plantInvaders.animation=0;
         }
         levelInvaders.delayAnimation=0
     }else{
@@ -179,7 +179,7 @@ function squidAnimation(){
                 squid.animation=240
             }
         }
-        if(squid.positionY + 20>plant.positionY){
+        if(squid.positionY + 20>plantInvaders.positionY){
             levelInvaders.finish=true
         }
     })
@@ -258,14 +258,14 @@ function keyController(){
     })
 }
 function moveLeft(){
-    if(plant.positionX > 16){
-        plant.positionX -= plant.speed
+    if(plantInvaders.positionX > 16){
+        plantInvaders.positionX -= plantInvaders.speed
     }
 }
 
 function moveRight(){
-    if(plant.positionX < 584){
-        plant.positionX += plant.speed
+    if(plantInvaders.positionX < 584){
+        plantInvaders.positionX += plantInvaders.speed
     }
 }
 
@@ -284,9 +284,9 @@ function printFireball(){
 
 function createNewFireball(time){
     audioFireball.play()
-    let fireball= new Fireball(0, 5, time, 250, plant.positionX+6)
+    let fireball= new Fireball(0, 5, time, 250, plantInvaders.positionX+6)
     ctx.drawImage(fireballImage,fireball.animation,24,8,8,fireball.positionX,fireball.positionY,16,16)
-    plant.shoot=true
+    plantInvaders.shoot=true
     fireballArray.push(fireball);
 }
 
@@ -314,11 +314,11 @@ function resetMarioInvaders(){
     squidArray=[]
     starsArray=[]
     ground.positionX=0;
-    plant.animation=0;
-    plant.speed=7;
-    plant.shoot=false;
-    plant.positionX=276;
-    plant.positionY=250;
+    plantInvaders.animation=0;
+    plantInvaders.speed=7;
+    plantInvaders.shoot=false;
+    plantInvaders.positionX=276;
+    plantInvaders.positionY=250;
     levelInvaders.speed=0.2;
     levelInvaders.score=0;
     levelInvaders.finish=false;
