@@ -1,13 +1,14 @@
-@font-face{
+@font-face {
     font-family: 'super_mario';
     src: url('/assets/fonts/SuperMario256.ttf');
 }
-@font-face{
+
+@font-face {
     font-family: 'gameboy';
     src: url('/assets/fonts/gameBoy.ttf');
 }
 
-.body{
+.body {
     overflow: hidden;
     margin: 0;
     padding: 0;
@@ -16,17 +17,18 @@
     justify-content: center;
     align-items: center;
     background-color: #d1cbbf;
-    background: cover;
 }
-.main{
+
+.main {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     text-align: center;
 }
-#canvas{
-    border-color: #75767e ;
+
+#canvas {
+    border-color: #75767e;
     border-width: 60px;
     border-style: solid;
     border-radius: 10px;
@@ -35,18 +37,19 @@
     width: 600px;
     height: 300px;
 }
-#power_circle{
+
+#power_circle {
     position: absolute;
     width: 20px;
     height: 20px;
     box-shadow: 0 0 3pt 2pt #323130;
-    background-image: radial-gradient(#b32428,#9b111e);
+    background-image: radial-gradient(#b32428, #9b111e);
     border-radius: 50%;
     top: 130px;
     left: 20px;
 }
 
-#power_text{
+#power_text {
     position: absolute;
     font-size: 10px;
     color: #acb5c0;
@@ -54,7 +57,7 @@
     left: 10px;
 }
 
-#lines_lila_left{
+#lines_lila_left {
     background-color: #872e77;
     position: absolute;
     width: 300px;
@@ -62,7 +65,8 @@
     top: 15px;
     left: 10px;
 }
-#lines_blue_left{
+
+#lines_blue_left {
     background-color: #32235a;
     position: absolute;
     width: 300px;
@@ -70,7 +74,8 @@
     top: 30px;
     left: 10px;
 }
-.lines_text{
+
+.lines_text {
     position: absolute;
     font-size: 15px;
     color: #acb5c0;
@@ -78,7 +83,7 @@
     left: 325px;
 }
 
-#lines_lila_right{
+#lines_lila_right {
     background-color: #872e77;
     position: absolute;
     width: 150px;
@@ -86,7 +91,8 @@
     top: 15px;
     left: 535px;
 }
-#lines_blue_right{
+
+#lines_blue_right {
     background-color: #32235a;
     position: absolute;
     width: 150px;
@@ -94,7 +100,8 @@
     top: 30px;
     left: 535px;
 }
-.down_text{
+
+.down_text {
     position: absolute;
     top: 410px;
     left: 0;
@@ -107,16 +114,16 @@
 
 
 /*------MENU-----------*/
-.menu{
+.menu {
     width: 600px;
     height: 300px;
-    border-color: #75767e ;
+    border-color: #75767e;
     border-width: 60px;
     border-style: solid;
     border-radius: 10px;
     border-bottom-right-radius: 100px;
     box-shadow: 0 0 3pt 2pt #63605b;
-    background-color: rgba(48, 98, 48,0.5);
+    background-color: rgba(48, 98, 48, 0.5);
     font-family: 'gameboy', monospace;
     font-weight: bold;
     display: flex;
@@ -124,12 +131,14 @@
     align-items: center;
     color: #0f380f;
 }
-.menu h1{
+
+.menu h1 {
     border: double 3px #0f380f;
     padding: 0px 5px;
     box-shadow: 2pt 2pt 1pt 2pt #0f380f;
 }
-.menu button{
+
+.menu button {
     border: none;
     background-color: transparent;
     font-family: 'gameboy', monospace;
@@ -137,23 +146,24 @@
     color: #0f380f;
 }
 
-.menu__buttons{
+.menu__buttons {
     display: flex;
     flex-direction: column;
 }
 
-.menu button:hover{
+.menu button:hover {
     background-color: #0f380f;
     color: #9bbc0f;
     cursor: pointer;
 }
-.menu button:focus{
+
+.menu button:focus {
     outline: none;
     background-color: #0f380f;
     color: #9bbc0f;
 }
 
-.menu input{
+.menu input {
     background-color: transparent;
     border: solid 3px #0f380f;
     font-family: 'gameboy', monospace;
@@ -163,28 +173,29 @@
     width: 90%;
     text-align: center;
 }
-#validation_user{
+
+#validation_user {
     border: none;
     cursor: pointer;
 }
 
-.menu input:focus{
+.menu input:focus {
     outline: none;
     background-color: #0f380f;
     color: #9bbc0f;
 }
 
-.menu input:hover{
+.menu input:hover {
     outline: none;
     background-color: #0f380f;
     color: #9bbc0f;
 }
 
-.menu input:placeholder-shown{
+.menu input:placeholder-shown {
     border: solid 3px #0f380f
 }
 
-.section__empty{
+.section__empty {
     display: flex;
     flex-direction: column;
     border: double 3px #0f380f;
@@ -195,18 +206,21 @@
     align-items: center;
 
 }
+
 .section__empty::-webkit-scrollbar {
     background-color: transparent;
 }
+
 .section__empty::-webkit-scrollbar-thumb {
     background-color: #0f380f;
 }
+
 /*------------HIDDEN CLASS----------*/
-.hidden{
+.hidden {
     display: none;
 }
 
-@media only screen and (orientation:portrait){
+@media only screen and (orientation:portrait) {
     .body {
         -webkit-transform: rotate(90deg);
         -moz-transform: rotate(90deg);
@@ -216,7 +230,7 @@
     }
 }
 
-@media only screen and (orientation:landscape){
+@media only screen and (orientation:landscape) {
 
     .body {
         -webkit-transform: rotate(0deg);
