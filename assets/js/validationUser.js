@@ -60,7 +60,9 @@ function checkValidation(e){
                 addListenerMenuButtons()
                 removeformListener()
                 chromeStart.focus();
-                userData.textContent=`USERNAME: ${userActive.name} HS: ${userActive.highScore} M`
+                userData.innerHTML=""
+                userData.innerHTML=`<p>USERNAME: ${userActive.name}</p>
+                <p> HS: ${userActive.highScore} M, HS: ${userActive.highScoreInvaders} PTS</p>`
             }else if(result==="passIncorrect"){
                 return
             }else if(result==="false"){
@@ -72,7 +74,9 @@ function checkValidation(e){
                 addListenerMenuButtons()
                 removeformListener()
                 chromeStart.focus();
-                userData.textContent=`USERNAME: ${userActive.name} HS: ${userActive.highScore} M`
+                userData.innerHTML=""
+                userData.innerHTML=`<p>USERNAME: ${userActive.name}</p>
+                <p> HS: ${userActive.highScore} M , HS: ${userActive.highScoreInvaders} PTS</p>`
             }
         }else{passwordInput.focus()}
     }else{usernameInput.focus()}
@@ -105,7 +109,7 @@ function checkUser(username, userPass){
 }
 
 function createNewUser(username,password){
-    let newUser= new User(username, 0, encryptPassword(password))
+    let newUser= new User(username, 0, encryptPassword(password), 0)
     userActive=newUser;
     users.push(newUser);
     localStorage.setItem('users',JSON.stringify(users));

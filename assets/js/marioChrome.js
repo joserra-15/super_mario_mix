@@ -189,7 +189,7 @@ function scoreUpdate(){
         ctx.fillStyle="#FFD700";
         ctx.fillText(`GAME OVER`,200,135)
         ctx.strokeText(`GAME OVER`,200,135)
-        updateLocalStorage(level.score)
+        updateLocalStorage(level.score, userActive.highScoreInvaders)
     }else{
         level.score++
     }
@@ -202,7 +202,9 @@ function finishPlayGame(){
     if(level.finish===true){
         clearInterval(playGame);
         resetMarioChrome();
-        userData.textContent=`USERNAME: ${userActive.name} HS: ${userActive.highScore} M`
+        userData.innerHTML=""
+        userData.innerHTML=`<p>USERNAME: ${userActive.name}</p>
+        <p> HS: ${userActive.highScore} M, HS: ${userActive.highScoreInvaders} PTS</p>`
         setTimeout(()=>{
             menu.classList.toggle('hidden');
             document.getElementById('canvas').classList.toggle('hidden');
@@ -233,12 +235,20 @@ function resetMarioChrome(){
 
 //--------LOCALSTORAGE
 
-function updateLocalStorage(hs){
+function updateLocalStorage(hs, hp){
     if(userActive.highScore<hs){
         userActive.highScore= hs;
         users.forEach(user=>{
             if(user.name===userActive.name){
                 user.highScore= hs
+            }
+        })
+    }
+    if(userActive.highScoreInvaders < hp){
+        userActive.highScoreInvaders= hp;
+        users.forEach(user=>{
+            if(user.name===userActive.name){
+                user.highScoreInvaders= hp
             }
         })
     }

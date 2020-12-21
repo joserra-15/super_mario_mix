@@ -23,7 +23,8 @@ const audioJump=document.getElementById("audio_jump");
 const audioDeath=document.getElementById("audio_death");
 const audioFireball=document.getElementById("audio_fireball");
 const audioDeathAlien=document.getElementById("audio_aliens");
-const audioInvaders=document.getElementById("audio_invaders");
+const audioFastx=document.getElementById("audio_fastx");
+const audioFasty=document.getElementById("audio_fasty");
 //-----CANVAS AND CONTEXT
 let canvas,ctx;
 const width= 600;
@@ -50,13 +51,14 @@ let FPS=20;
 let playGameInvader
 
 //----USERS
-let userActive={name: "jose", highScore: 0 , password: ""}
+let userActive={name: "jose", highScore: 0 , password: "", highScoreInvaders: 0}
 let users=[]
 
 class User {
-    constructor(name, highScore, password){
+    constructor(name, highScore, password, highScoreInvaders){
         this.name=name;
         this.highScore=highScore;
         this.password=password;
+        this.highScoreInvaders=highScoreInvaders
     }
 }

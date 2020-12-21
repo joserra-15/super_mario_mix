@@ -172,8 +172,13 @@ function squidAnimation(){
             squid.positionY +=squid.vy
             squid.vx=-squid.vx
             squid.positionX += squid.vx
-            squid.vx>0?squid.vx += levelInvaders.speed:squid.vx += - levelInvaders.speed
-            audioInvaders.play()
+            if(squid.vx>0){
+                squid.vx += levelInvaders.speed
+                audioFasty.play()
+            }else{
+                squid.vx += - levelInvaders.speed
+                audioFastx.play()
+            }
         }
     })
 }
@@ -206,57 +211,12 @@ function scoreUpdateInvaders(){
         ctx.fillStyle="#FFD700";
         ctx.fillText(`GAME OVER`,200,135)
         ctx.strokeText(`GAME OVER`,200,135)
-        //updateLocalStorage(level.score)
+        audioDeath.play();
+        updateLocalStorage(userActive.highScore, levelInvaders.score)
     }
 }
 
-    //------LISTENER SPACE BAR
-document.addEventListener('keydown',(event) => {
-    if(event.code == 'Space'){
-        event.preventDefault();
-        if( level.start){
-            jump()
-        }
-        if(levelInvaders.start){
-            keyMove[0].keyPressed=true
-        }
-    }
-    if(event.code ==  'ArrowLeft'){
-        event.preventDefault();
-        if(levelInvaders.start){
-            keyMove[1].keyPressed=true
-        }
-    }
-    if(event.code ==  'ArrowRight'){
-        event.preventDefault();
-        if(levelInvaders.start){
-            keyMove[2].keyPressed=true
-        }
-    }
-})
-document.addEventListener('keyup', (event) => {
-    if(event.code == 'Space'){
-        event.preventDefault();
-        if( level.start){
-            jump()
-        }
-        if(levelInvaders.start){
-            keyMove[0].keyPressed=false
-        }
-    }
-    if(event.code ==  'ArrowLeft'){
-        event.preventDefault();
-        if(levelInvaders.start){
-            keyMove[1].keyPressed=false
-        }
-    }
-    if(event.code ==  'ArrowRight'){
-        event.preventDefault();
-        if(levelInvaders.start){
-            keyMove[2].keyPressed=false
-        }
-    }
-})
+    //------ KEY CONTROLLER
 
 function keyController(){
     keyMove.forEach(key=>{
@@ -318,6 +278,9 @@ function finishPlayGameInvaders(){
     if(levelInvaders.finish===true){
         clearInterval(playGameInvader);
         resetMarioInvaders();
+        userData.innerHTML=""
+        userData.innerHTML=`<p>USERNAME: ${userActive.name}</p>
+        <p> HS: ${userActive.highScore} M, HS: ${userActive.highScoreInvaders} PTS</p>`
         setTimeout(()=>{
             menu.classList.toggle('hidden');
             document.getElementById('canvas').classList.toggle('hidden');
@@ -326,6 +289,7 @@ function finishPlayGameInvaders(){
         },3000)
     }
 }
+
 
 function resetMarioInvaders(){
     fireballArray=[]

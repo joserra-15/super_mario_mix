@@ -145,6 +145,7 @@
 .menu button:hover{
     background-color: #0f380f;
     color: #9bbc0f;
+    cursor: pointer;
 }
 .menu button:focus{
     outline: none;
@@ -164,6 +165,7 @@
 }
 #validation_user{
     border: none;
+    cursor: pointer;
 }
 
 .menu input:focus{

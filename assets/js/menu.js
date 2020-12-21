@@ -42,13 +42,89 @@ function showRanking(e){
     menuButtons.classList.toggle('hidden')
     sectionEmpty.classList.toggle('hidden')
     users=users.sort(((a,b)=>b.highScore - a.highScore))
+    sectionEmpty.innerHTML=`<table id='table_ranking'>
+        <tr>
+            <td>RANK</td>
+            <td>SCORE</td>
+            <td>NAME</td>
+        </tr>
+        </table>`
     for(let i=0;i<users.length;i++){
-        sectionEmpty.insertAdjacentHTML("beforeend",`<p>${i+1}- username: ${users[i].name} HS: ${users[i].highScore} M</p>`)
+        document.getElementById("table_ranking").insertAdjacentHTML("beforeend",`
+        <tr>
+        <td>${i+1}</td>
+        <td>${users[i].highScore} M</td>
+        <td>${users[i].name}</td>
+        </tr>`)
     }
+    sectionEmpty.insertAdjacentHTML("afterbegin",`<section><button id="ranking_chrome">Mario Chrome</button> <button id="ranking_invaders">Mario Invaders</button> </section`)
     sectionEmpty.insertAdjacentHTML("afterbegin",`<button id="back">back</button>`)
     removeListenerMenuButtons()
-    document.getElementById("back").focus()
+    document.getElementById("ranking_chrome").focus()
     document.getElementById("back").addEventListener('click',goToMenu)
+    document.getElementById("ranking_chrome").addEventListener('click',showRankingChrome)
+    document.getElementById("ranking_invaders").addEventListener('click',showRankingInvaders)
+
+    function showRankingChrome(e){
+        e.preventDefault()
+        document.getElementById("back").removeEventListener('click',goToMenu)
+        document.getElementById("ranking_chrome").removeEventListener('click',showRankingChrome)
+        document.getElementById("ranking_invaders").removeEventListener('click',showRankingInvaders)
+        sectionEmpty.innerHTML=""
+        users=users.sort(((a,b)=>b.highScore - a.highScore))
+        sectionEmpty.innerHTML=`<table id='table_ranking'>
+        <tr>
+            <td>RANK</td>
+            <td>SCORE</td>
+            <td>NAME</td>
+        </tr>
+        </table>`
+        for(let i=0;i<users.length;i++){
+            document.getElementById("table_ranking").insertAdjacentHTML("beforeend",`
+            <tr>
+            <td>${i+1}</td>
+            <td>${users[i].highScore} M</td>
+            <td>${users[i].name}</td>
+            </tr>`)
+        }
+        sectionEmpty.insertAdjacentHTML("afterbegin",`<section><button id="ranking_chrome">Mario Chrome</button> <button id="ranking_invaders">Mario Invaders</button> </section`)
+        sectionEmpty.insertAdjacentHTML("afterbegin",`<button id="back">back</button>`)
+        removeListenerMenuButtons()
+        document.getElementById("ranking_chrome").focus()
+        document.getElementById("back").addEventListener('click',goToMenu)
+        document.getElementById("ranking_chrome").addEventListener('click',showRankingChrome)
+        document.getElementById("ranking_invaders").addEventListener('click',showRankingInvaders)
+    }
+    function showRankingInvaders(e){
+        e.preventDefault()
+        document.getElementById("back").removeEventListener('click',goToMenu)
+        document.getElementById("ranking_chrome").removeEventListener('click',showRankingChrome)
+        document.getElementById("ranking_invaders").removeEventListener('click',showRankingInvaders)
+        sectionEmpty.innerHTML=""
+        users=users.sort(((a,b)=>b.highScoreInvaders - a.highScoreInvaders))
+        sectionEmpty.innerHTML=`<table id='table_ranking'>
+        <tr>
+            <td>RANK</td>
+            <td>SCORE</td>
+            <td>NAME</td>
+        </tr>
+        </table>`
+        for(let i=0;i<users.length;i++){
+            document.getElementById("table_ranking").insertAdjacentHTML("beforeend",`
+            <tr>
+            <td>${i+1}</td>
+            <td>${users[i].highScoreInvaders} PTS</td>
+            <td>${users[i].name}</td>
+            </tr>`)
+        }
+        sectionEmpty.insertAdjacentHTML("afterbegin",`<section><button id="ranking_chrome">Mario Chrome</button> <button id="ranking_invaders">Mario Invaders</button> </section`)
+        sectionEmpty.insertAdjacentHTML("afterbegin",`<button id="back">back</button>`)
+        removeListenerMenuButtons()
+        document.getElementById("ranking_invaders").focus()
+        document.getElementById("back").addEventListener('click',goToMenu)
+        document.getElementById("ranking_chrome").addEventListener('click',showRankingChrome)
+        document.getElementById("ranking_invaders").addEventListener('click',showRankingInvaders)
+    }
 }
 
 function goToMenu(e){
