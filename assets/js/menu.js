@@ -8,7 +8,7 @@ function marioChrome(e) {
         document.getElementById('canvas').classList.toggle('hidden');
         removeListenerMenuButtons()
     }, 1000 / FPS)
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         btnJump.classList.remove("hidden")
     }
     start();
@@ -21,7 +21,7 @@ function marioInvaders(e) {
         document.getElementById('canvas').classList.toggle('hidden');
         removeListenerMenuButtons()
     }, 1000 / FPS)
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         btnJump.classList.remove("hidden")
         btnLeft.classList.remove("hidden")
         btnRight.classList.remove("hidden")

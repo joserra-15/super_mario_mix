@@ -18,9 +18,9 @@ const options = document.getElementById("options");
 const sectionEmpty = document.querySelector(".section__empty");
 
 //------MOUSE CONTROLLER
-const btnLeft=document.getElementById("button_left")
-const btnRight=document.getElementById("button_right")
-const btnJump=document.getElementById("button_jump")
+const btnLeft = document.getElementById("button_left")
+const btnRight = document.getElementById("button_right")
+const btnJump = document.getElementById("button_jump")
 
 
 //------AUDIO

@@ -46,13 +46,13 @@ function jump() {
         mario.vy = mario.jump
     } else {
         if (mario.doubleJump === false) {
-            if(random()<20){
+            if (random() < 20) {
                 audioJump.pause()
-                audioJump.currentTime=0
+                audioJump.currentTime = 0
                 audioDoubleJump.play()
-            }else{
+            } else {
                 audioJump.pause()
-                audioJump.currentTime=0
+                audioJump.currentTime = 0
                 audioJump.play()
             }
             mario.doubleJump = true;

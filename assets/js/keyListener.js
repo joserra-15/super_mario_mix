@@ -45,43 +45,38 @@ document.addEventListener('keyup', (event) => {
 //----------MOUSE EVENTS
 
 
-btnLeft.addEventListener('mousedown',(event)=>{
+btnLeft.addEventListener('click', (event) => {
     event.preventDefault();
     if (levelInvaders.start) {
-        keyMove[1].keyPressed = true
+        if (keyMove[1].keyPressed === false) {
+            keyMove[1].keyPressed = true
+            keyMove[2].keyPressed = false
+        } else {
+            keyMove[1].keyPressed = false
+        }
     }
 })
-btnRight.addEventListener('mousedown', (event) => {
+btnRight.addEventListener('click', (event) => {
     event.preventDefault();
     if (levelInvaders.start) {
-        keyMove[2].keyPressed = true
+        if (keyMove[2].keyPressed === false) {
+            keyMove[2].keyPressed = true
+            keyMove[1].keyPressed = false
+        } else {
+            keyMove[2].keyPressed = false
+        }
     }
 })
-btnJump.addEventListener('mousedown', (event) => {
+btnJump.addEventListener('click', (event) => {
     event.preventDefault();
     if (level.start) {
         jump()
     }
     if (levelInvaders.start) {
-        keyMove[0].keyPressed = true
-    }
-})
-
-btnLeft.addEventListener('mouseup',(event)=>{
-    event.preventDefault();
-    if (levelInvaders.start) {
-        keyMove[1].keyPressed = false
-    }
-})
-btnRight.addEventListener('mouseup', (event) => {
-    event.preventDefault();
-    if (levelInvaders.start) {
-        keyMove[2].keyPressed = false
-    }
-})
-btnJump.addEventListener('mouseup', (event) => {
-    event.preventDefault();
-    if (levelInvaders.start) {
-        keyMove[0].keyPressed = false
+        if (keyMove[0].keyPressed === false) {
+            keyMove[0].keyPressed = true
+        } else {
+            keyMove[0].keyPressed = false
+        }
     }
 })
