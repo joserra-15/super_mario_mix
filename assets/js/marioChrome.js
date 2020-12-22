@@ -4,6 +4,14 @@ class Pipe {
         this.positionY = 215
     }
 }
+class Plant {
+    constructor(positionX) {
+        this.positionX = positionX
+        this.positionY = 190
+        this.animation = 0
+    }
+}
+
 class Cloud {
     constructor() {
         this.positionX = width + Math.random()
@@ -76,6 +84,8 @@ function loadImage() {
     groundImg = new Image();
     pipeImg = new Image();
     cloudImg = new Image();
+    plantImage = new Image();
+    plantImage.src = '../../assets/img/enemysheet.png';
     marioSprite.src = '../../assets/img/smallmariosheet.png';
     groundImg.src = '../../assets/img/background.png'
     pipeImg.src = '../../assets/img/tiles.png'
@@ -93,6 +103,7 @@ function printAll() {
     printMap();
     printCloud();
     printMario();
+    printPlant();
     printPipe();
 }
 
@@ -106,7 +117,8 @@ function printMap() {
 
 function printPipe() {
     if (random() < 4) {
-        pipeArray.push(new Pipe)
+        pipeArray.push(new Pipe())
+        createPlant(pipeArray[pipeArray.length -1].positionX + 12)
     }
     if (pipeArray.length !== 0) {
         pipeArray.forEach(pipe => {
@@ -123,6 +135,17 @@ function printCloud() {
         cloudsArray.forEach(cloud => ctx.drawImage(cloudImg, 64, 336, 16, 16, cloud.positionX, cloud.positionY, 16, 16))
     }
 }
+function printPlant(){
+    if (plantsArray.length != 0) {
+        plantsArray.forEach(plant => ctx.drawImage(plantImage, plant.animation, 192, 16, 32, plant.positionX, plant.positionY, 16, 32))
+    }
+}
+
+function createPlant(positionX){
+    if (random() < 70) {
+        plantsArray.push(new Plant(positionX))
+    }
+}
 
 
 //-------ANIMATIONS
@@ -131,6 +154,7 @@ function animation() {
     animationMario();
     animationGround();
     animationPipe();
+    animationPlant();
     animationClouds();
 }
 
@@ -163,6 +187,7 @@ function animationGround() {
 }
 
 function animationPipe() {
+    pipeArray=pipeArray.filter(pipe=> pipe.positionX>-40)
     pipeArray.forEach(pipe => {
         if (pipe.positionX > -40) {
             if (level.finish === false) {
@@ -173,11 +198,24 @@ function animationPipe() {
 }
 
 function animationClouds() {
+    cloudsArray=cloudsArray.filter(cloud=> cloud.positionX>-32)
     cloudsArray.forEach(cloud => {
         if (cloud.positionX > -32) {
             cloud.positionX -= level.speed / 2
         }
     })
+}
+
+function animationPlant(){
+    plantsArray=plantsArray.filter(plant=> plant.positionX>-40)
+    plantsArray.forEach(plant=>{
+        if (plant.positionX > -40) {
+            if (level.finish === false) {
+                plant.positionX -= level.speed - 0.18
+            }
+        }
+    })
+
 }
 
 function random() {
@@ -198,6 +236,21 @@ function collision() {
                 mario.animation = 0;
             }
         }
+    })
+
+    plantsArray.forEach(plant => {
+        if (plant.positionX + 16 >= mario.positionX - 2 && plant.positionX <= mario.positionX + 23) {
+            plant.animation=16;
+            if (mario.positionY - 23 >= plant.positionY - 32) {
+                if (level.finish === false) {
+                    audioDeath.play();
+                }
+                plant.animation=16;
+                level.finish = true;
+                level.speed = 0;
+                mario.animation = 0;
+            }
+        }else{plant.animation=0}
     })
 }
 
@@ -246,10 +299,9 @@ function finishPlayGame() {
 }
 
 function resetMarioChrome() {
-    //pipe.positionX= width+random();
-    //pipe.positionY= 215;
     pipeArray = []
     cloudsArray = []
+    plantsArray = []
     ground.positionX = 0;
     mario.animation = 16;
     mario.vy = 0;

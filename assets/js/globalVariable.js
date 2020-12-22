@@ -66,7 +66,7 @@ const levelInvaders = {
     start: false,
     delayAnimation: 0,
 }
-let plantInvadersImage, fireballImage, squidImage
+let plantImage, fireballImage, squidImage
 const plantInvaders = {
     animation: 0,
     speed: 7,
@@ -77,6 +77,7 @@ const plantInvaders = {
 let fireballArray = []
 let squidArray = []
 let starsArray = []
+let plantsArray = []
 let keyMove = [{
     keyName: 'Space',
     keyPressed: false

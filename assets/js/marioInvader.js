@@ -78,10 +78,10 @@ function initiationInvaders() {
 }
 
 function loadImageInvaders() {
-    plantInvadersImage = new Image();
+    plantImage = new Image();
     fireballImage = new Image();
     squidImage = new Image();
-    plantInvadersImage.src = '../../assets/img/enemysheet.png';
+    plantImage.src = '../../assets/img/enemysheet.png';
     fireballImage.src = '../../assets/img/particlesheet.png';
     squidImage.src = '../../assets/img/characters.gif';
 }
@@ -101,7 +101,7 @@ function printInvaders() {
 }
 
 function printplantInvaders() {
-    ctx.drawImage(plantInvadersImage, plantInvaders.animation, 192, 16, 32, plantInvaders.positionX, plantInvaders.positionY, 24, 40)
+    ctx.drawImage(plantImage, plantInvaders.animation, 192, 16, 32, plantInvaders.positionX, plantInvaders.positionY, 24, 40)
 }
 
 function printMapInvaders() {
