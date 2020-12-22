@@ -46,7 +46,11 @@ function jump() {
         mario.vy = mario.jump
     } else {
         if (mario.doubleJump === false) {
-            audioJump.play()
+            if(random()<20){
+                audioDoubleJump.play()
+            }else{
+                audioJump.play()
+            }
             mario.doubleJump = true;
             mario.vy = 0
             mario.vy = mario.jump / 1.5
@@ -281,7 +285,6 @@ function collision() {
                 if (level.finish === false) {
                     audioDeath.play();
                 }
-                console.log("plant collision")
                 plant.animation = 16;
                 level.finish = true;
                 level.speed = 0;
@@ -298,7 +301,6 @@ function collision() {
                 if (level.finish === false) {
                     audioDeath.play();
                 }
-                console.log("bullet collision")
                 level.finish = true;
                 level.speed = 0;
                 mario.animation = 0;

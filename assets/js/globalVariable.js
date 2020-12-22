@@ -25,6 +25,7 @@ const audioFireball = document.getElementById("audio_fireball");
 const audioDeathAlien = document.getElementById("audio_aliens");
 const audioFastx = document.getElementById("audio_fastx");
 const audioFasty = document.getElementById("audio_fasty");
+const audioDoubleJump = document.getElementById("audio_doubleJump");
 //-----CANVAS AND CONTEXT
 let canvas, ctx;
 const width = 600;

@@ -160,7 +160,7 @@ function showInstruction(e) {
     document.getElementById("instruction").removeEventListener('click', showInstruction)
     sectionEmpty.innerHTML = ""
     sectionEmpty.insertAdjacentHTML("beforeend", `<button id="back">back</button>`)
-    sectionEmpty.insertAdjacentHTML("beforeend", `<p>Chrome Mario: Press the space Bar and Mario will jump over the obstacles in your path. The longer you play, the faster Mario runs/the ground moves. Once you crash into something, the game is over and you have to restart.</p>
+    sectionEmpty.insertAdjacentHTML("beforeend", `<p>Chrome Mario: Press the space Bar and Mario will jump over the obstacles in your path, if you press the space Bar in the jump, you can do a double jump. The longer you play, the faster Mario runs/the ground moves. Once you crash into something, the game is over and you have to restart.</p>
     <p>
     Mario Invaders: you have to try to kill all the aliens before they reach you by shooting fireballs by pressing the space Bar. To move you can use the right and left arrow keys on the keyboard. Remember for every alien you kill you earn 1 point. When you finish them all they will come more and faster. The game ends when the aliens arrive at your base.</p>`)
     document.getElementById("back").focus()
