@@ -67,6 +67,7 @@ function checkValidation(e) {
                 userData.innerHTML = `<p>USERNAME: ${userActive.name}</p>
                 <p> HS: ${userActive.highScore} M, HS: ${userActive.highScoreInvaders} PTS</p>`
             } else if (result === "passIncorrect") {
+                passwordInput.focus()
                 return
             } else if (result === "false") {
                 createNewUser(usernameInput.value, passwordInput.value)

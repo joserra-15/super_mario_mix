@@ -66,7 +66,7 @@ const levelInvaders = {
     start: false,
     delayAnimation: 0,
 }
-let plantImage, fireballImage, squidImage
+let plantImage, fireballImage, squidImage, bulletImage
 const plantInvaders = {
     animation: 0,
     speed: 7,
@@ -78,6 +78,7 @@ let fireballArray = []
 let squidArray = []
 let starsArray = []
 let plantsArray = []
+let bulletsArray = []
 let keyMove = [{
     keyName: 'Space',
     keyPressed: false
@@ -90,12 +91,7 @@ let keyMove = [{
 }]
 
 //----USERS
-let userActive = {
-    name: "jose",
-    highScore: 0,
-    password: "",
-    highScoreInvaders: 0
-}
+let userActive = {}
 let users = []
 
 class User {

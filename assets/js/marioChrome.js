@@ -12,6 +12,15 @@ class Plant {
     }
 }
 
+class Bullet {
+    constructor() {
+        this.positionX = width + Math.random()
+        this.positionY = random()
+        this.x=228
+        this.y=334
+    }
+}
+
 class Cloud {
     constructor() {
         this.positionX = width + Math.random()
@@ -83,9 +92,11 @@ function loadImage() {
     marioSprite = new Image();
     groundImg = new Image();
     pipeImg = new Image();
+    bulletImage = new Image();
     cloudImg = new Image();
     plantImage = new Image();
     plantImage.src = '../../assets/img/enemysheet.png';
+    bulletImage.src = '../../assets/img/characters.gif';
     marioSprite.src = '../../assets/img/smallmariosheet.png';
     groundImg.src = '../../assets/img/background.png'
     pipeImg.src = '../../assets/img/tiles.png'
@@ -105,6 +116,7 @@ function printAll() {
     printMario();
     printPlant();
     printPipe();
+    printBullet();
 }
 
 function printMario() {
@@ -118,7 +130,7 @@ function printMap() {
 function printPipe() {
     if (random() < 4) {
         pipeArray.push(new Pipe())
-        createPlant(pipeArray[pipeArray.length -1].positionX + 12)
+        createPlant(pipeArray[pipeArray.length - 1].positionX + 10)
     }
     if (pipeArray.length !== 0) {
         pipeArray.forEach(pipe => {
@@ -126,7 +138,16 @@ function printPipe() {
         })
     }
 }
-
+function printBullet() {
+    if (random() < 4) {
+        bulletsArray.push(new Bullet())
+    }
+    if (bulletsArray.length !== 0) {
+        bulletsArray.forEach(bullet => {
+                ctx.drawImage(bulletImage, bullet.x, bullet.y, 16, 16, bullet.positionX, bullet.positionY, 16, 16)
+        })
+    }
+}
 function printCloud() {
     if (random() < 3) {
         cloudsArray.push(new Cloud())
@@ -135,13 +156,14 @@ function printCloud() {
         cloudsArray.forEach(cloud => ctx.drawImage(cloudImg, 64, 336, 16, 16, cloud.positionX, cloud.positionY, 16, 16))
     }
 }
-function printPlant(){
+
+function printPlant() {
     if (plantsArray.length != 0) {
-        plantsArray.forEach(plant => ctx.drawImage(plantImage, plant.animation, 192, 16, 32, plant.positionX, plant.positionY, 16, 32))
+        plantsArray.forEach(plant => ctx.drawImage(plantImage, plant.animation, 192, 16, 32, plant.positionX, plant.positionY, 20, 32))
     }
 }
 
-function createPlant(positionX){
+function createPlant(positionX) {
     if (random() < 70) {
         plantsArray.push(new Plant(positionX))
     }
@@ -156,6 +178,7 @@ function animation() {
     animationPipe();
     animationPlant();
     animationClouds();
+    animationBullet();
 }
 
 function animationMario() {
@@ -187,7 +210,7 @@ function animationGround() {
 }
 
 function animationPipe() {
-    pipeArray=pipeArray.filter(pipe=> pipe.positionX>-40)
+    pipeArray = pipeArray.filter(pipe => pipe.positionX > -40)
     pipeArray.forEach(pipe => {
         if (pipe.positionX > -40) {
             if (level.finish === false) {
@@ -196,9 +219,18 @@ function animationPipe() {
         }
     })
 }
-
+function animationBullet() {
+    bulletsArray = bulletsArray.filter(bullet => bullet.positionX > -40 && bullet.positionY>50)
+    bulletsArray.forEach(bullet => {
+        if (bullet.positionX > -40) {
+            if (level.finish === false) {
+                bullet.positionX -= level.speed*1.2
+            }
+        }
+    })
+}
 function animationClouds() {
-    cloudsArray=cloudsArray.filter(cloud=> cloud.positionX>-32)
+    cloudsArray = cloudsArray.filter(cloud => cloud.positionX > -32)
     cloudsArray.forEach(cloud => {
         if (cloud.positionX > -32) {
             cloud.positionX -= level.speed / 2
@@ -206,9 +238,9 @@ function animationClouds() {
     })
 }
 
-function animationPlant(){
-    plantsArray=plantsArray.filter(plant=> plant.positionX>-40)
-    plantsArray.forEach(plant=>{
+function animationPlant() {
+    plantsArray = plantsArray.filter(plant => plant.positionX > -40)
+    plantsArray.forEach(plant => {
         if (plant.positionX > -40) {
             if (level.finish === false) {
                 plant.positionX -= level.speed - 0.18
@@ -240,18 +272,34 @@ function collision() {
 
     plantsArray.forEach(plant => {
         if (plant.positionX + 16 >= mario.positionX - 2 && plant.positionX <= mario.positionX + 23) {
-            plant.animation=16;
+            plant.animation = 16;
             if (mario.positionY - 23 >= plant.positionY - 32) {
                 if (level.finish === false) {
                     audioDeath.play();
                 }
-                plant.animation=16;
+                console.log("plant collision")
+                plant.animation = 16;
                 level.finish = true;
                 level.speed = 0;
                 mario.animation = 0;
             }
-        }else{plant.animation=0}
+        } else {
+            plant.animation = 0
+        }
     })
+
+    bulletsArray.forEach(bullet => {
+        if (bullet.positionX + 16 >= mario.positionX - 2 && bullet.positionX <= mario.positionX + 23) {
+            if (mario.positionY - 2 >= bullet.positionY - 16 && mario.positionY -23 <= bullet.positionY) {
+                if (level.finish === false) {
+                    audioDeath.play();
+                }
+                console.log("bullet collision")
+                level.finish = true;
+                level.speed = 0;
+                mario.animation = 0;
+            }
+    }})
 }
 
 
@@ -302,6 +350,7 @@ function resetMarioChrome() {
     pipeArray = []
     cloudsArray = []
     plantsArray = []
+    bulletsArray = []
     ground.positionX = 0;
     mario.animation = 16;
     mario.vy = 0;
