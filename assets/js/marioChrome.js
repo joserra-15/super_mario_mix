@@ -371,6 +371,7 @@ function resetMarioChrome() {
     level.score = 0;
     level.finish = false;
     level.start = false;
+    btnJump.classList.add("hidden")
 }
 
 //--------LOCALSTORAGE

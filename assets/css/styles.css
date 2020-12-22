@@ -17,6 +17,7 @@
     justify-content: center;
     align-items: center;
     background-color: #d1cbbf;
+    position: relative;
 }
 
 .main {
@@ -213,6 +214,41 @@
 
 .section__empty::-webkit-scrollbar-thumb {
     background-color: #0f380f;
+}
+
+/*------------bUTTONS CONTROL FOR MOBILE----------*/
+
+#button_left{
+    position: absolute;
+    bottom: 60px;
+    left: 10px;
+    width: 44px;
+    height: 44px;
+    border-radius: 5px;
+    opacity: 40%;
+}
+#button_right{
+    position: absolute;
+    bottom: 60px;
+    left: 80px;
+    width: 44px;
+    height: 44px;
+    border-radius: 5px;
+    opacity: 40%;
+}
+#button_jump{
+    position: absolute;
+    bottom: 60px;
+    right: 10px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    opacity: 40%;
+    background-color: #872e77;
+}
+#button_jump:hover, #button_right:hover, #button_left:hover{
+    opacity: 1;
+    outline: none;
 }
 
 /*------------HIDDEN CLASS----------*/

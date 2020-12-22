@@ -41,3 +41,47 @@ document.addEventListener('keyup', (event) => {
         }
     }
 })
+
+//----------MOUSE EVENTS
+
+
+btnLeft.addEventListener('mousedown',(event)=>{
+    event.preventDefault();
+    if (levelInvaders.start) {
+        keyMove[1].keyPressed = true
+    }
+})
+btnRight.addEventListener('mousedown', (event) => {
+    event.preventDefault();
+    if (levelInvaders.start) {
+        keyMove[2].keyPressed = true
+    }
+})
+btnJump.addEventListener('mousedown', (event) => {
+    event.preventDefault();
+    if (level.start) {
+        jump()
+    }
+    if (levelInvaders.start) {
+        keyMove[0].keyPressed = true
+    }
+})
+
+btnLeft.addEventListener('mouseup',(event)=>{
+    event.preventDefault();
+    if (levelInvaders.start) {
+        keyMove[1].keyPressed = false
+    }
+})
+btnRight.addEventListener('mouseup', (event) => {
+    event.preventDefault();
+    if (levelInvaders.start) {
+        keyMove[2].keyPressed = false
+    }
+})
+btnJump.addEventListener('mouseup', (event) => {
+    event.preventDefault();
+    if (levelInvaders.start) {
+        keyMove[0].keyPressed = false
+    }
+})

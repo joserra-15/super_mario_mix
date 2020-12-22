@@ -325,4 +325,7 @@ function resetMarioInvaders() {
     levelInvaders.start = false;
     levelInvaders.delayAnimation = 0;
     keyMove.forEach(key => key.keyPressed = false)
+    btnJump.classList.add("hidden")
+    btnLeft.classList.add("hidden")
+    btnRight.classList.add("hidden")
 }

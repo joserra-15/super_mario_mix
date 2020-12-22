@@ -17,6 +17,11 @@ const ranking = document.getElementById("ranking");
 const options = document.getElementById("options");
 const sectionEmpty = document.querySelector(".section__empty");
 
+//------MOUSE CONTROLLER
+const btnLeft=document.getElementById("button_left")
+const btnRight=document.getElementById("button_right")
+const btnJump=document.getElementById("button_jump")
+
 
 //------AUDIO
 const audioJump = document.getElementById("audio_jump");
