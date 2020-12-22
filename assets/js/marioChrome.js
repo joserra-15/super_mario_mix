@@ -16,8 +16,8 @@ class Bullet {
     constructor() {
         this.positionX = width + Math.random()
         this.positionY = random()
-        this.x=228
-        this.y=334
+        this.x = 228
+        this.y = 334
     }
 }
 
@@ -128,7 +128,7 @@ function printMap() {
 }
 
 function printPipe() {
-    if (random() < 4) {
+    if (random() < level.randomIncrement) {
         pipeArray.push(new Pipe())
         createPlant(pipeArray[pipeArray.length - 1].positionX + 10)
     }
@@ -138,16 +138,18 @@ function printPipe() {
         })
     }
 }
+
 function printBullet() {
-    if (random() < 4) {
+    if (random() < level.randomIncrement) {
         bulletsArray.push(new Bullet())
     }
     if (bulletsArray.length !== 0) {
         bulletsArray.forEach(bullet => {
-                ctx.drawImage(bulletImage, bullet.x, bullet.y, 16, 16, bullet.positionX, bullet.positionY, 16, 16)
+            ctx.drawImage(bulletImage, bullet.x, bullet.y, 16, 16, bullet.positionX, bullet.positionY, 16, 16)
         })
     }
 }
+
 function printCloud() {
     if (random() < 3) {
         cloudsArray.push(new Cloud())
@@ -219,16 +221,18 @@ function animationPipe() {
         }
     })
 }
+
 function animationBullet() {
-    bulletsArray = bulletsArray.filter(bullet => bullet.positionX > -40 && bullet.positionY>50)
+    bulletsArray = bulletsArray.filter(bullet => bullet.positionX > -40 && bullet.positionY > 50)
     bulletsArray.forEach(bullet => {
         if (bullet.positionX > -40) {
             if (level.finish === false) {
-                bullet.positionX -= level.speed*1.2
+                bullet.positionX -= level.speed * 1.2
             }
         }
     })
 }
+
 function animationClouds() {
     cloudsArray = cloudsArray.filter(cloud => cloud.positionX > -32)
     cloudsArray.forEach(cloud => {
@@ -289,8 +293,8 @@ function collision() {
     })
 
     bulletsArray.forEach(bullet => {
-        if (bullet.positionX + 16 >= mario.positionX - 2 && bullet.positionX <= mario.positionX + 23) {
-            if (mario.positionY - 2 >= bullet.positionY - 16 && mario.positionY -23 <= bullet.positionY) {
+        if (bullet.positionX + 12 >= mario.positionX - 2 && bullet.positionX <= mario.positionX + 23) {
+            if (mario.positionY - 2 <= bullet.positionY + 14 && mario.positionY + 23 >= bullet.positionY) {
                 if (level.finish === false) {
                     audioDeath.play();
                 }
@@ -299,7 +303,8 @@ function collision() {
                 level.speed = 0;
                 mario.animation = 0;
             }
-    }})
+        }
+    })
 }
 
 
@@ -307,6 +312,7 @@ function collision() {
 function scoreUpdate() {
     if (level.score > level.compareRound) {
         level.speed += 0.4
+        level.randomIncrement += 0.01
         level.compareRound = level.score + 100
     }
     ctx.font = "17px super_mario";

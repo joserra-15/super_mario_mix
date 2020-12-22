@@ -51,7 +51,8 @@ const level = {
     score: 0,
     finish: false,
     start: false,
-    compareRound: 100
+    compareRound: 100,
+    randomIncrement: 3,
 }
 let FPS = 20;
 let pipeArray = []
